@@ -4,351 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Segment Sheet Builder · Luminize</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* ── Core palette — deep space navy + violet ── */
-  --bg:#07071a;
-  --bg2:#0b0b24;
-  --s1:#0f0f2e;
-  --s2:#13133a;
-  --s3:#181844;
-  --s4:#1e1e52;
-
-  /* ── Card glass ── */
-  --glass:rgba(255,255,255,0.04);
-  --glass-hi:rgba(255,255,255,0.07);
-  --glass-border:rgba(255,255,255,0.08);
-  --glass-border-hi:rgba(255,255,255,0.16);
-  --glass-border-act:rgba(100,120,255,0.5);
-
-  /* ── Accent colours ── */
-  --cyan:#00d4ff;
-  --cyan-d:rgba(0,212,255,0.12);
-  --cyan-b:rgba(0,212,255,0.35);
-  --indigo:#6470ff;
-  --indigo-d:rgba(100,112,255,0.15);
-  --indigo-b:rgba(100,112,255,0.4);
-  --violet:#9f7aea;
-  --violet-d:rgba(159,122,234,0.12);
-  --green:#00e5a0;
-  --green-d:rgba(0,229,160,0.12);
-  --green-b:rgba(0,229,160,0.35);
-  --amber:#ffb547;
-  --red:#ff5c7a;
-  --red-d:rgba(255,92,122,0.1);
-  --red-b:rgba(255,92,122,0.3);
-  --pink:#f472b6;
-
-  /* ── Text ── */
-  --text:#e8eaf6;--t2:#8b8fb8;--t3:#454775;
-
-  /* ── Type ── */
-  --display:'Outfit',sans-serif;
-  --mono:'DM Mono',monospace;
-
-  /* ── Radius ── */
-  --r:12px;--rl:18px;--rxl:24px;
+  --bg:#0c0c0e;--s1:#131316;--s2:#19191e;--s3:#1f1f26;
+  --border:rgba(255,255,255,0.07);--border-em:rgba(255,255,255,0.13);--border-hi:rgba(255,255,255,0.22);
+  --accent:#6366f1;--accent-d:rgba(99,102,241,0.18);--accent-b:rgba(99,102,241,0.35);
+  --green:#22c55e;--green-d:rgba(34,197,94,0.13);--green-b:rgba(34,197,94,0.3);
+  --amber:#f59e0b;--red:#ef4444;--red-d:rgba(239,68,68,0.1);--red-b:rgba(239,68,68,0.28);
+  --sky:#38bdf8;--text:#eeeef2;--t2:#8888a0;--t3:#4a4a62;
+  --mono:'DM Mono',monospace;--display:'Bricolage Grotesque',sans-serif;
+  --r:10px;--rl:16px;--rxl:20px;
 }
-
-/* ── BACKGROUND ── */
-body{
-  font-family:var(--display);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding:2.5rem 1.25rem 5rem;
-  font-size:13px;
-  /* deep space mesh */
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(100,112,255,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(0,212,255,0.1) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(159,122,234,0.06) 0%, transparent 70%);
-  background-attachment:fixed;
-}
+body{font-family:var(--mono);background:var(--bg);color:var(--text);min-height:100vh;padding:2.5rem 1.25rem 5rem;font-size:13px}
 .shell{max-width:840px;margin:0 auto}
-
-/* ── HEADER ── */
 .hdr{margin-bottom:2rem}
-.badge{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--cyan);
-  background:var(--cyan-d);
-  border:1px solid var(--cyan-b);
-  padding:5px 13px;border-radius:20px;margin-bottom:1rem;
-  box-shadow:0 0 16px rgba(0,212,255,0.15);
-}
-.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite;box-shadow:0 0 6px var(--cyan)}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-h1{
-  font-family:var(--display);font-size:30px;font-weight:800;
-  line-height:1.1;margin-bottom:.5rem;letter-spacing:-.03em;
-  background:linear-gradient(135deg,#ffffff 0%,#c4caff 50%,var(--cyan) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.sub{font-size:12px;color:var(--t2);line-height:1.8;max-width:580px;font-weight:400}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-d);border:1px solid var(--accent-b);padding:4px 11px;border-radius:20px;margin-bottom:.9rem}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.1;margin-bottom:.4rem;letter-spacing:-.02em}
+.sub{font-size:11.5px;color:var(--t2);line-height:1.75;max-width:580px}
 
-/* ── MODE TABS ── */
-.mode-tabs{display:flex;gap:6px;margin-bottom:18px;
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:var(--rl);padding:5px;
-  backdrop-filter:blur(12px);width:fit-content;
-}
-.mode-tab{
-  background:transparent;border:none;border-radius:var(--r);
-  padding:9px 18px;cursor:pointer;
-  font-family:var(--display);font-size:12px;font-weight:600;
-  color:var(--t2);transition:all .2s;letter-spacing:-.01em;
-}
-.mode-tab:hover{color:var(--text);background:var(--glass-hi)}
-.mode-tab.active{
-  background:linear-gradient(135deg,var(--indigo),rgba(100,112,255,0.7));
-  color:#fff;
-  box-shadow:0 4px 20px rgba(100,112,255,0.4),0 0 0 1px rgba(100,112,255,0.3);
-}
+/* mode tabs */
+.mode-tabs{display:flex;gap:8px;margin-bottom:14px}
+.mode-tab{background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);padding:9px 15px;cursor:pointer;font-family:var(--display);font-size:12px;font-weight:600;color:var(--t2);transition:all .2s}
+.mode-tab:hover{color:var(--text)}.mode-tab.active{background:var(--accent-d);border-color:var(--accent-b);color:#a5b4fc}
 .mode-panel{display:none}.mode-panel.active{display:block}
 
-/* ── CARDS ── */
-.card{
-  background:linear-gradient(145deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%);
-  border:1px solid var(--glass-border);
-  border-radius:var(--rxl);
-  overflow:hidden;margin-bottom:10px;
-  transition:border-color .3s,box-shadow .3s;
-  backdrop-filter:blur(12px);
-  box-shadow:0 4px 24px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.06);
-}
-.card.active{border-color:var(--glass-border-hi);box-shadow:0 4px 32px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.06),inset 0 1px 0 rgba(255,255,255,0.08)}
-.card.done{border-color:rgba(0,229,160,0.25);box-shadow:0 4px 24px rgba(0,229,160,0.08),inset 0 1px 0 rgba(0,229,160,0.05)}
-.card-hdr{display:flex;align-items:center;gap:12px;padding:16px 20px}
-.num{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;font-family:var(--mono);
-  background:var(--glass);border:1px solid var(--glass-border);
-  color:var(--t2);transition:all .25s;
-}
-.card.done .num{background:rgba(0,229,160,0.15);border-color:rgba(0,229,160,0.4);color:var(--green);box-shadow:0 0 10px rgba(0,229,160,0.2)}
-.card.active .num{background:var(--indigo-d);border-color:var(--indigo-b);color:var(--indigo);box-shadow:0 0 10px rgba(100,112,255,0.3)}
-.card-title{font-family:var(--display);font-size:14px;font-weight:700;flex:1;letter-spacing:-.02em;color:var(--text)}
-.card-st{font-size:10px;color:var(--t3);font-family:var(--mono)}.card.done .card-st{color:var(--green)}
+/* cards */
+.card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rxl);overflow:hidden;margin-bottom:10px;transition:border-color .25s}
+.card.active{border-color:var(--border-em)}.card.done{border-color:rgba(34,197,94,.25)}
+.card-hdr{display:flex;align-items:center;gap:12px;padding:15px 20px}
+.num{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;background:var(--s3);border:1px solid var(--border-em);color:var(--t2);transition:all .2s}
+.card.done .num{background:rgba(34,197,94,.13);border-color:rgba(34,197,94,.3);color:var(--green)}
+.card.active .num{background:var(--accent-d);border-color:var(--accent-b);color:var(--accent)}
+.card-title{font-family:var(--display);font-size:13px;font-weight:600;flex:1;letter-spacing:-.01em}
+.card-st{font-size:10px;color:var(--t3)}.card.done .card-st{color:var(--green)}
 .card-body{padding:0 20px 20px;display:none}.card.active .card-body{display:block}
 
-/* ── FILE SOURCE TOGGLES ── */
+/* file source toggles */
 .src-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.src-toggle{
-  display:flex;align-items:center;gap:7px;
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:30px;padding:7px 14px;cursor:pointer;
-  font-size:11px;font-weight:600;color:var(--t2);
-  transition:all .2s;user-select:none;
-}
-.src-toggle:hover{border-color:var(--glass-border-hi);color:var(--text)}
-.src-toggle.on{
-  background:var(--indigo-d);border-color:var(--indigo-b);color:#c4caff;
-  box-shadow:0 0 12px rgba(100,112,255,0.2);
-}
-.src-toggle .pip{width:7px;height:7px;border-radius:50%;background:var(--t3);transition:all .2s;flex-shrink:0}
-.src-toggle.on .pip{background:var(--indigo);box-shadow:0 0 6px var(--indigo)}
+.src-toggle{display:flex;align-items:center;gap:7px;background:var(--s2);border:1px solid var(--border-em);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:11px;font-weight:500;color:var(--t2);transition:all .2s;user-select:none}
+.src-toggle:hover{border-color:var(--accent);color:var(--text)}
+.src-toggle.on{background:var(--accent-d);border-color:var(--accent-b);color:#c7d2fe}
+.src-toggle .pip{width:7px;height:7px;border-radius:50%;background:var(--t3);transition:background .15s;flex-shrink:0}
+.src-toggle.on .pip{background:var(--accent)}
 .src-hint{font-size:10px;color:var(--t3);margin-bottom:10px}
 
-/* ── DROP ZONES ── */
+/* drop zones */
 .dz-grid{display:grid;gap:10px}
 .dz-grid.col2{grid-template-columns:1fr 1fr}
 .dz-grid.col3{grid-template-columns:1fr 1fr 1fr}
 .dz-grid.col1{grid-template-columns:1fr}
-.dz{
-  border:1px dashed rgba(100,112,255,0.3);
-  border-radius:var(--rl);padding:22px 14px;text-align:center;
-  cursor:pointer;transition:all .25s;
-  background:linear-gradient(145deg,rgba(100,112,255,0.06),rgba(0,212,255,0.03));
-  position:relative;overflow:hidden;
-}
-.dz::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 0%,rgba(100,112,255,0.08),transparent 70%);
-  pointer-events:none;
-}
-.dz:hover{border-color:rgba(100,112,255,0.6);background:linear-gradient(145deg,rgba(100,112,255,0.1),rgba(0,212,255,0.05));box-shadow:0 0 20px rgba(100,112,255,0.15)}
-.dz.loaded{border-style:solid;border-color:rgba(0,229,160,0.4);background:linear-gradient(145deg,rgba(0,229,160,0.07),rgba(0,229,160,0.03));box-shadow:0 0 16px rgba(0,229,160,0.1)}
-.dz.disabled{opacity:.3;pointer-events:none}
+.dz{border:1px dashed var(--border-em);border-radius:var(--r);padding:20px 14px;text-align:center;cursor:pointer;transition:all .2s;background:var(--s2);position:relative;overflow:hidden}
+.dz:hover{border-color:var(--accent);background:rgba(99,102,241,0.08)}.dz.loaded{border-style:solid;border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08)}
+.dz.disabled{opacity:.35;pointer-events:none}
 .dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.dz-ico{font-size:20px;color:var(--t3);margin-bottom:8px;transition:all .2s}.dz.loaded .dz-ico{color:var(--green)}
-.dz:hover .dz-ico{color:var(--indigo)}
-.dz-lbl{font-size:11px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
-.dz-tag{font-size:9px;color:var(--t3);background:var(--glass);border:1px solid var(--glass-border);border-radius:4px;padding:2px 7px;display:inline-block;margin-bottom:5px;font-family:var(--mono)}
-.dz-hint{font-size:10px;color:var(--t3);font-family:var(--mono)}.dz.loaded .dz-hint{color:var(--green)}
+.dz-ico{font-size:17px;color:var(--t3);margin-bottom:6px}.dz.loaded .dz-ico{color:var(--green)}
+.dz-lbl{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.dz-tag{font-size:9px;color:var(--t3);background:var(--s3);border-radius:4px;padding:2px 6px;display:inline-block;margin-bottom:4px}
+.dz-hint{font-size:10px;color:var(--t3)}.dz.loaded .dz-hint{color:var(--green)}
 
-/* ── SEGMENTS ── */
-.seg-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
-.seg-btn{
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:var(--r);padding:14px 8px;cursor:pointer;
-  font-family:var(--display);font-size:12px;font-weight:700;
-  color:var(--t2);text-align:center;transition:all .2s;letter-spacing:-.01em;
-}
-.seg-btn:hover{border-color:var(--glass-border-hi);color:var(--text);background:var(--glass-hi);transform:translateY(-1px)}
-.seg-btn.sel{color:#fff;transform:translateY(-2px)}
-.seg-btn[data-seg=Blue].sel{background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(14,165,233,.15));border-color:rgba(56,189,248,.5);color:#7dd3fc;box-shadow:0 4px 20px rgba(56,189,248,.2),0 0 0 1px rgba(56,189,248,.1)}
-.seg-btn[data-seg=Green].sel{background:linear-gradient(135deg,rgba(0,229,160,.2),rgba(0,229,160,.08));border-color:rgba(0,229,160,.5);color:var(--green);box-shadow:0 4px 20px rgba(0,229,160,.2),0 0 0 1px rgba(0,229,160,.1)}
-.seg-btn[data-seg=Grey].sel{background:linear-gradient(135deg,rgba(148,163,184,.18),rgba(100,116,139,.08));border-color:rgba(148,163,184,.4);color:#cbd5e1;box-shadow:0 4px 20px rgba(148,163,184,.15)}
-.seg-btn[data-seg=Pink].sel{background:linear-gradient(135deg,rgba(244,114,182,.2),rgba(244,114,182,.08));border-color:rgba(244,114,182,.5);color:var(--pink);box-shadow:0 4px 20px rgba(244,114,182,.2)}
-.seg-btn[data-seg=Purple].sel{background:linear-gradient(135deg,rgba(100,112,255,.25),rgba(159,122,234,.12));border-color:rgba(100,112,255,.5);color:#a5b4fc;box-shadow:0 4px 20px rgba(100,112,255,.25),0 0 0 1px rgba(100,112,255,.1)}
-.seg-btn[data-seg=All].sel{background:linear-gradient(135deg,rgba(255,181,71,.2),rgba(255,181,71,.08));border-color:rgba(255,181,71,.5);color:var(--amber);box-shadow:0 4px 20px rgba(255,181,71,.2)}
-.seg-count{display:block;font-size:9px;font-family:var(--mono);opacity:.55;margin-top:3px;font-weight:400}
+/* segment */
+.seg-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+.seg-btn{background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);padding:13px 8px;cursor:pointer;font-family:var(--display);font-size:12px;font-weight:600;color:var(--t2);text-align:center;transition:all .2s;letter-spacing:-.01em}
+.seg-btn:hover{border-color:var(--border-hi);color:var(--text)}.seg-btn.sel{color:#fff}
+.seg-btn[data-seg=Blue].sel{background:rgba(56,189,248,.15);border-color:var(--sky);color:var(--sky)}
+.seg-btn[data-seg=Green].sel{background:rgba(34,197,94,.13);border-color:rgba(34,197,94,.3);color:var(--green)}
+.seg-btn[data-seg=Grey].sel{background:rgba(148,163,184,.12);border-color:rgba(148,163,184,.4);color:#94a3b8}
+.seg-btn[data-seg=Pink].sel{background:rgba(236,72,153,.13);border-color:rgba(236,72,153,.4);color:#f9a8d4}
+.seg-btn[data-seg=Purple].sel{background:var(--accent-d);border-color:var(--accent-b);color:#a5b4fc}
+.seg-btn[data-seg=All].sel{background:rgba(251,191,36,.13);border-color:rgba(251,191,36,.4);color:#fbbf24}
+.seg-count{display:block;font-size:9px;font-family:var(--mono);opacity:.6;margin-top:3px;font-weight:400}
 
-/* ── BRANDS ── */
-.brand-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+/* brands */
+.brand-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .brand-actions{display:flex;gap:6px}
-.btn-xs{
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600;
-  cursor:pointer;font-family:var(--mono);color:var(--t2);transition:all .15s;
-}
-.btn-xs:hover{border-color:var(--indigo-b);color:var(--indigo);background:var(--indigo-d)}
+.btn-xs{background:none;border:1px solid var(--border-em);border-radius:6px;padding:3px 9px;font-size:10px;font-weight:500;cursor:pointer;font-family:var(--mono);color:var(--t2);transition:all .15s}
+.btn-xs:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-d)}
 .brand-grid{display:flex;flex-wrap:wrap;gap:6px;min-height:36px}
-.br-chip{
-  display:inline-flex;align-items:center;gap:5px;
-  border:1px solid var(--glass-border);border-radius:8px;
-  padding:5px 10px;cursor:pointer;font-size:11px;font-weight:500;
-  color:var(--t2);background:var(--glass);user-select:none;transition:all .15s;
-}
-.br-chip:hover{border-color:var(--indigo-b);color:#c4caff}
-.br-chip.on{background:var(--indigo-d);border-color:var(--indigo-b);color:#c4caff;box-shadow:0 0 8px rgba(100,112,255,0.15)}
-.br-chip .pip{width:6px;height:6px;border-radius:50%;background:var(--t3);flex-shrink:0;transition:all .15s}
-.br-chip.on .pip{background:var(--indigo);box-shadow:0 0 4px var(--indigo)}
+.br-chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border-em);border-radius:7px;padding:5px 9px;cursor:pointer;font-size:11px;color:var(--t2);background:var(--s2);user-select:none;transition:all .15s}
+.br-chip:hover{border-color:var(--accent);color:var(--accent)}.br-chip.on{background:var(--accent-d);border-color:var(--accent-b);color:#c7d2fe}
+.br-chip .pip{width:6px;height:6px;border-radius:50%;background:var(--t3);flex-shrink:0;transition:background .15s}.br-chip.on .pip{background:var(--accent)}
 .brand-empty{font-size:11px;color:var(--t3);font-style:italic;padding-top:6px}
 
-/* ── COLUMNS ── */
-.col-groups{display:flex;flex-direction:column;gap:8px}
-.cg{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r)}
-.cg-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
-.cg-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.cg-lbl.core{color:var(--t2)}.cg-lbl.rank{color:var(--amber)}.cg-lbl.live{color:var(--cyan)}.cg-lbl.attr{color:var(--violet)}
-.cg-checks{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px 12px}
-.pill{
-  display:inline-flex;align-items:center;gap:5px;
-  border:1px solid var(--glass-border);border-radius:6px;
-  padding:5px 9px;cursor:pointer;font-size:10px;font-weight:500;
-  color:var(--t2);background:var(--bg2);user-select:none;transition:all .15s;
-}
-.pill:hover{border-color:var(--indigo-b);color:#c4caff}.pill input{display:none}
-.pill.on{background:var(--indigo-d);border-color:var(--indigo-b);color:#c4caff}
-.pill .pip{width:5px;height:5px;border-radius:50%;background:var(--t3);flex-shrink:0}
-.pill.on .pip{background:var(--indigo);box-shadow:0 0 4px var(--indigo)}
+/* columns */
+.col-groups{display:flex;flex-direction:column;gap:7px}
+.cg{background:var(--s2);border-radius:var(--r)}
+.cg-hdr{display:flex;align-items:center;justify-content:space-between;padding:9px 12px}
+.cg-lbl{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.cg-lbl.core{color:var(--t2)}.cg-lbl.rank{color:var(--amber)}.cg-lbl.live{color:#60a5fa}.cg-lbl.attr{color:#c084fc}
+.cg-checks{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px 10px}
+.pill{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border-em);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:10px;color:var(--t2);background:var(--s1);user-select:none;transition:all .15s}
+.pill:hover{border-color:var(--accent);color:var(--accent)}.pill input{display:none}
+.pill.on{background:var(--accent-d);border-color:var(--accent-b);color:#c7d2fe}
+.pill .pip{width:5px;height:5px;border-radius:50%;background:var(--t3);flex-shrink:0}.pill.on .pip{background:var(--accent)}
 
-/* ── LEGEND ── */
-.legend{
-  display:flex;flex-wrap:wrap;gap:10px;padding:12px 14px;
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:var(--r);margin-bottom:10px;
-}
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:10px;padding:12px 14px;background:var(--s2);border-radius:var(--r);border:1px solid var(--border);margin-bottom:10px}
 .lg-item{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--t2)}
-.lg-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0;border:1px solid rgba(255,255,255,0.1)}
+.lg-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0;border:1px solid rgba(0,0,0,0.12)}
 
-/* ── BUILD BUTTON ── */
-.btn-gen{
-  width:100%;
-  background:linear-gradient(135deg,var(--indigo) 0%,#8b5cf6 50%,var(--cyan) 100%);
-  background-size:200% 200%;animation:gradshift 4s ease infinite;
-  color:#fff;border:none;border-radius:var(--r);
-  font-family:var(--display);font-size:14px;font-weight:800;
-  padding:15px;cursor:pointer;letter-spacing:-.02em;
-  transition:opacity .15s,transform .1s,box-shadow .2s;margin-top:6px;
-  box-shadow:0 4px 24px rgba(100,112,255,0.4),0 0 0 1px rgba(255,255,255,0.1);
-  position:relative;overflow:hidden;
-}
-.btn-gen::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent 50%);
-  pointer-events:none;
-}
-@keyframes gradshift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.btn-gen:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 32px rgba(100,112,255,0.5)}
-.btn-gen:active{transform:translateY(0);box-shadow:0 2px 12px rgba(100,112,255,0.3)}
-.btn-gen:disabled{opacity:.3;cursor:not-allowed;animation:none;transform:none}
+/* build */
+.btn-gen{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--r);font-family:var(--display);font-size:14px;font-weight:700;padding:14px;cursor:pointer;letter-spacing:-.01em;transition:opacity .15s,transform .1s;margin-top:4px}
+.btn-gen:hover{opacity:.88}.btn-gen:active{transform:scale(.99)}.btn-gen:disabled{opacity:.35;cursor:not-allowed}
+.prog-wrap{height:2px;background:var(--s3);border-radius:2px;margin:14px 0 10px;overflow:hidden;display:none}
+.prog-wrap.show{display:block}.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--sky));width:0;transition:width .4s ease}
+.log-box{display:none;font-size:10px;line-height:2;color:var(--t3)}.log-box.show{display:block}
+.log-line{display:flex;gap:8px}.lk{color:var(--accent)}.lv{color:var(--t2)}
 
-/* ── PROGRESS ── */
-.prog-wrap{height:3px;background:var(--glass);border-radius:3px;margin:14px 0 10px;overflow:hidden;display:none}
-.prog-wrap.show{display:block}
-.prog-bar{height:100%;background:linear-gradient(90deg,var(--indigo),var(--cyan));width:0;transition:width .4s ease;box-shadow:0 0 8px var(--cyan)}
-
-/* ── LOGS ── */
-.log-box{display:none;font-size:10px;line-height:2.2;color:var(--t3);font-family:var(--mono)}.log-box.show{display:block}
-.log-line{display:flex;gap:10px}.lk{color:var(--indigo)}.lv{color:var(--t2)}
-
-/* ── RESULT ── */
-.result{
-  background:linear-gradient(145deg,rgba(0,229,160,0.07),rgba(0,229,160,0.03));
-  border:1px solid rgba(0,229,160,0.25);
-  border-radius:var(--rl);padding:20px;margin-top:14px;display:none;
-  box-shadow:0 4px 24px rgba(0,229,160,0.08),inset 0 1px 0 rgba(0,229,160,0.1);
-}
+/* result */
+.result{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:var(--rl);padding:18px 20px;margin-top:14px;display:none}
 .result.show{display:block}
-.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
-.result-title{font-family:var(--display);font-size:16px;font-weight:800;color:var(--green);margin-bottom:3px;letter-spacing:-.03em}
-.result-sub{font-size:10px;color:var(--t2);font-family:var(--mono)}
-.btn-dl{
-  background:linear-gradient(135deg,var(--green),rgba(0,229,160,0.7));
-  color:#041a10;border:none;border-radius:var(--r);
-  font-family:var(--display);font-size:12px;font-weight:800;
-  padding:10px 20px;cursor:pointer;white-space:nowrap;
-  transition:all .15s;flex-shrink:0;
-  box-shadow:0 4px 16px rgba(0,229,160,0.35);
-}
-.btn-dl:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,229,160,0.45)}
-.stats{display:flex;gap:24px;flex-wrap:wrap}
-.stat-n{font-family:var(--display);font-size:24px;font-weight:800;color:var(--text);letter-spacing:-.04em}
-.stat-l{font-size:10px;color:var(--t3);margin-top:1px;font-family:var(--mono)}
+.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.result-title{font-family:var(--display);font-size:15px;font-weight:700;color:var(--green);margin-bottom:3px;letter-spacing:-.02em}
+.result-sub{font-size:10px;color:var(--t2)}
+.btn-dl{background:var(--green);color:#061a0e;border:none;border-radius:var(--r);font-family:var(--display);font-size:12px;font-weight:700;padding:9px 18px;cursor:pointer;white-space:nowrap;transition:opacity .15s;flex-shrink:0}
+.btn-dl:hover{opacity:.85}
+.stats{display:flex;gap:22px;flex-wrap:wrap}
+.stat-n{font-family:var(--display);font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.03em}
+.stat-l{font-size:10px;color:var(--t3);margin-top:1px}
 
-/* ── REPORT PREVIEW ── */
-.rpt-preview{margin-top:14px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r);overflow:hidden}
-.rpt-hdr{padding:9px 14px;font-size:10px;font-weight:700;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--glass-border);font-family:var(--mono)}
-.rpt-table{width:100%;border-collapse:collapse;font-size:11px;font-family:var(--display)}
-.rpt-table th{background:rgba(255,255,255,0.03);padding:7px 10px;text-align:left;font-size:10px;font-weight:600;color:var(--t2);border-bottom:1px solid var(--glass-border);letter-spacing:.05em;text-transform:uppercase}
-.rpt-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+/* report preview */
+.rpt-preview{margin-top:14px;background:var(--s2);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
+.rpt-hdr{padding:8px 14px;font-size:10px;font-weight:500;color:var(--t2);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.rpt-table{width:100%;border-collapse:collapse;font-size:11px}
+.rpt-table th{background:var(--s3);padding:6px 10px;text-align:left;font-size:10px;font-weight:500;color:var(--t2);border-bottom:1px solid var(--border)}
+.rpt-table td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--text)}
 .rpt-table tr:last-child td{border-bottom:none}
-.rpt-table tr:hover td{background:rgba(255,255,255,0.02)}
-.s-badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:.02em}
+.s-badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600}
 .delta-up{color:var(--green);font-weight:700}.delta-dn{color:var(--red);font-weight:700}.delta-neu{color:var(--amber)}
 
-/* ── ERROR ── */
-.err-box{
-  background:var(--red-d);border:1px solid var(--red-b);
-  border-radius:var(--r);padding:12px 14px;
-  font-size:11px;color:#ffa0b4;margin-top:10px;display:none;
-}
-.err-box.show{display:block}
-
-/* ── MISC ── */
-hr.div{border:none;border-top:1px solid var(--glass-border);margin:14px 0}
-.sec-lbl{font-size:10px;font-weight:700;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
-.footer{margin-top:2.5rem;font-size:10px;color:var(--t3);text-align:center;line-height:2;font-family:var(--mono)}
-
-/* ── SNAPSHOT / COMPARE INPUTS ── */
-select,input[type=text]{
-  width:100%;
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  border-radius:var(--r);
-  color:var(--text);
-  font-family:var(--mono);
-  font-size:12px;
-  padding:9px 12px;
-  outline:none;
-  transition:border .2s,box-shadow .2s;
-  appearance:none;
-}
-select:focus,input[type=text]:focus{border-color:var(--indigo-b);box-shadow:0 0 0 3px rgba(100,112,255,0.12)}
-select option{background:#0f0f2e;color:var(--text)}
-
-/* ── SPINNER ── */
+.err-box{background:var(--red-d);border:1px solid var(--red-b);border-radius:var(--r);padding:12px 14px;font-size:11px;color:#fca5a5;margin-top:10px;display:none}.err-box.show{display:block}
+hr.div{border:none;border-top:1px solid var(--border);margin:14px 0}
+.sec-lbl{font-size:10px;font-weight:500;color:var(--t2);letter-spacing:.09em;text-transform:uppercase;margin-bottom:9px}
+.footer{margin-top:2.5rem;font-size:10px;color:var(--t3);text-align:center;line-height:2}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.15);border-top-color:var(--cyan);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:7px;box-shadow:0 0 8px var(--cyan)}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+
 </style>
 </head>
 <body>
@@ -414,11 +209,11 @@ select option{background:#0f0f2e;color:var(--text)}
   <div class="card-body">
     <div class="sec-lbl" style="margin-bottom:10px">Select segment(s)</div>
     <div class="seg-grid">
-      <button class="seg-btn" data-seg="Blue"   onclick="pickSeg('Blue')">Blue<span class="seg-count">8 brands</span></button>
+      <button class="seg-btn" data-seg="Blue"   onclick="pickSeg('Blue')">Blue<span class="seg-count">10 brands</span></button>
       <button class="seg-btn" data-seg="Green"  onclick="pickSeg('Green')">Green<span class="seg-count">34 brands</span></button>
-      <button class="seg-btn" data-seg="Grey"   onclick="pickSeg('Grey')">Grey<span class="seg-count">21 brands</span></button>
-      <button class="seg-btn" data-seg="Pink"   onclick="pickSeg('Pink')">Pink<span class="seg-count">23 brands</span></button>
-      <button class="seg-btn" data-seg="Purple" onclick="pickSeg('Purple')">Purple<span class="seg-count">31 brands</span></button>
+      <button class="seg-btn" data-seg="Grey"   onclick="pickSeg('Grey')">Grey<span class="seg-count">23 brands</span></button>
+      <button class="seg-btn" data-seg="Pink"   onclick="pickSeg('Pink')">Pink<span class="seg-count">22 brands</span></button>
+      <button class="seg-btn" data-seg="Purple" onclick="pickSeg('Purple')">Purple<span class="seg-count">34 brands</span></button>
       <button class="seg-btn seg-all" data-seg="All" onclick="pickAll()">All<span class="seg-count">5 segments</span></button>
     </div>
     <hr class="div">
@@ -436,37 +231,51 @@ select option{background:#0f0f2e;color:var(--text)}
   <div class="card-body">
     <div class="col-groups">
       <div class="cg"><div class="cg-hdr"><span class="cg-lbl core">Core</span><button class="btn-xs" onclick="togGrp('core')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill on" data-g="core" data-c="Brand"><input type="checkbox" checked><span class="pip"></span>Brand</label><label class="pill on" data-g="core" data-c="ASIN"><input type="checkbox" checked><span class="pip"></span>ASIN</label><label class="pill on" data-g="core" data-c="hive_status"><input type="checkbox" checked><span class="pip"></span>Hive Status</label><label class="pill on" data-g="core" data-c="hive_round"><input type="checkbox" checked><span class="pip"></span>Update Round</label></div>
+        <div class="cg-checks">
+          <label class="pill on" data-g="core" data-c="Brand"><input type="checkbox" checked><span class="pip"></span>Brand</label>
+          <label class="pill on" data-g="core" data-c="ASIN"><input type="checkbox" checked><span class="pip"></span>ASIN</label>
+          <label class="pill on" data-g="core" data-c="hive_status"><input type="checkbox" checked><span class="pip"></span>Hive Status</label>
+          <label class="pill on" data-g="core" data-c="hive_round"><input type="checkbox" checked><span class="pip"></span>Update Round</label>
+        </div>
       </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl rank">Sales</span><button class="btn-xs" onclick="togGrp('sales')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill on" data-g="sales" data-c="rank_cur"><input type="checkbox" checked><span class="pip"></span>Sales Rank</label><label class="pill on" data-g="sales" data-c="rank_30d"><input type="checkbox" checked><span class="pip"></span>Rank 30d avg</label><label class="pill on" data-g="sales" data-c="rank_90d"><input type="checkbox" checked><span class="pip"></span>Rank 90d avg</label><label class="pill" data-g="sales" data-c="list_price"><input type="checkbox"><span class="pip"></span>List Price</label><label class="pill" data-g="sales" data-c="buybox_seller"><input type="checkbox"><span class="pip"></span>Buy Box Seller</label><label class="pill" data-g="sales" data-c="bought_month"><input type="checkbox"><span class="pip"></span>Bought / Month</label><label class="pill" data-g="sales" data-c="rank_30drop"><input type="checkbox"><span class="pip"></span>Rank 30d drop %</label></div>
+      <div class="cg"><div class="cg-hdr"><span class="cg-lbl rank">Sales rank</span><button class="btn-xs" onclick="togGrp('rank')">toggle all</button></div>
+        <div class="cg-checks">
+          <label class="pill on" data-g="rank" data-c="rank_cur"><input type="checkbox" checked><span class="pip"></span>Current</label>
+          <label class="pill on" data-g="rank" data-c="rank_30d"><input type="checkbox" checked><span class="pip"></span>30d avg</label>
+          <label class="pill on" data-g="rank" data-c="rank_90d"><input type="checkbox" checked><span class="pip"></span>90d avg</label>
+        </div>
       </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl live">Copy</span><button class="btn-xs" onclick="togGrp('content')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill on" data-g="content" data-c="title"><input type="checkbox" checked><span class="pip"></span>Title</label><label class="pill on" data-g="content" data-c="b1"><input type="checkbox" checked><span class="pip"></span>Bullet 1</label><label class="pill on" data-g="content" data-c="b2"><input type="checkbox" checked><span class="pip"></span>Bullet 2</label><label class="pill on" data-g="content" data-c="b3"><input type="checkbox" checked><span class="pip"></span>Bullet 3</label><label class="pill on" data-g="content" data-c="b4"><input type="checkbox" checked><span class="pip"></span>Bullet 4</label><label class="pill on" data-g="content" data-c="b5"><input type="checkbox" checked><span class="pip"></span>Bullet 5</label><label class="pill on" data-g="content" data-c="desc"><input type="checkbox" checked><span class="pip"></span>Description</label><label class="pill on" data-g="content" data-c="search"><input type="checkbox" checked><span class="pip"></span>Search Terms</label><label class="pill" data-g="content" data-c="b6"><input type="checkbox"><span class="pip"></span>Bullet 6</label><label class="pill" data-g="content" data-c="short_desc"><input type="checkbox"><span class="pip"></span>Short Description</label></div>
+      <div class="cg"><div class="cg-hdr"><span class="cg-lbl live">Content fields</span><button class="btn-xs" onclick="togGrp('content')">toggle all</button></div>
+        <div class="cg-checks">
+          <label class="pill on" data-g="content" data-c="title"><input type="checkbox" checked><span class="pip"></span>Title</label>
+          <label class="pill on" data-g="content" data-c="b1"><input type="checkbox" checked><span class="pip"></span>Bullet 1</label>
+          <label class="pill on" data-g="content" data-c="b2"><input type="checkbox" checked><span class="pip"></span>Bullet 2</label>
+          <label class="pill on" data-g="content" data-c="b3"><input type="checkbox" checked><span class="pip"></span>Bullet 3</label>
+          <label class="pill on" data-g="content" data-c="b4"><input type="checkbox" checked><span class="pip"></span>Bullet 4</label>
+          <label class="pill on" data-g="content" data-c="b5"><input type="checkbox" checked><span class="pip"></span>Bullet 5</label>
+          <label class="pill on" data-g="content" data-c="desc"><input type="checkbox" checked><span class="pip"></span>Description</label>
+          <label class="pill on" data-g="content" data-c="search"><input type="checkbox" checked><span class="pip"></span>Search Terms</label>
+        </div>
       </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl attr">Images</span><button class="btn-xs" onclick="togGrp('images')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="images" data-c="img_url"><input type="checkbox"><span class="pip"></span>Main Image URL</label><label class="pill" data-g="images" data-c="img_count"><input type="checkbox"><span class="pip"></span>Image Count</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl attr">Branded Content</span><button class="btn-xs" onclick="togGrp('branded')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="branded" data-c="has_video"><input type="checkbox"><span class="pip"></span>Has Main Video</label><label class="pill" data-g="branded" data-c="has_aplus"><input type="checkbox"><span class="pip"></span>Has A+ Content</label><label class="pill" data-g="branded" data-c="aplus_mfr"><input type="checkbox"><span class="pip"></span>Mfr A+ Content</label><label class="pill" data-g="branded" data-c="aplus_desc"><input type="checkbox"><span class="pip"></span>A+ Description</label><label class="pill" data-g="branded" data-c="video_count"><input type="checkbox"><span class="pip"></span>Video Count</label><label class="pill" data-g="branded" data-c="store_name"><input type="checkbox"><span class="pip"></span>Brand Store Name</label><label class="pill" data-g="branded" data-c="store_url"><input type="checkbox"><span class="pip"></span>Brand Store URL</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl core">Core Attributes</span><button class="btn-xs" onclick="togGrp('coreattr')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="coreattr" data-c="upc"><input type="checkbox"><span class="pip"></span>UPC</label><label class="pill" data-g="coreattr" data-c="manufacturer"><input type="checkbox"><span class="pip"></span>Manufacturer</label><label class="pill" data-g="coreattr" data-c="size_ca"><input type="checkbox"><span class="pip"></span>Size</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl rank">Variations</span><button class="btn-xs" onclick="togGrp('variations')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="variations" data-c="parent_asin"><input type="checkbox"><span class="pip"></span>Parent ASIN</label><label class="pill" data-g="variations" data-c="parent_title"><input type="checkbox"><span class="pip"></span>Parent Title</label><label class="pill" data-g="variations" data-c="var_asins"><input type="checkbox"><span class="pip"></span>Variated ASINs</label><label class="pill" data-g="variations" data-c="var_count"><input type="checkbox"><span class="pip"></span># In Variation</label><label class="pill" data-g="variations" data-c="var_attrs"><input type="checkbox"><span class="pip"></span>Variation Attributes</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl rank">Category</span><button class="btn-xs" onclick="togGrp('category')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="category" data-c="cat_root"><input type="checkbox"><span class="pip"></span>Root Category</label><label class="pill" data-g="category" data-c="cat_sub"><input type="checkbox"><span class="pip"></span>Sub-Category</label><label class="pill" data-g="category" data-c="cat_type"><input type="checkbox"><span class="pip"></span>Type</label><label class="pill" data-g="category" data-c="cat_group"><input type="checkbox"><span class="pip"></span>Product Group</label><label class="pill" data-g="category" data-c="cat_item_type"><input type="checkbox"><span class="pip"></span>Item Type</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl attr">Detail Attributes</span><button class="btn-xs" onclick="togGrp('attr')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill on" data-g="attr" data-c="ac"><input type="checkbox" checked><span class="pip"></span>Color</label><label class="pill on" data-g="attr" data-c="ap"><input type="checkbox" checked><span class="pip"></span>Pattern</label><label class="pill on" data-g="attr" data-c="auv"><input type="checkbox" checked><span class="pip"></span>Unit Count</label><label class="pill on" data-g="attr" data-c="aut"><input type="checkbox" checked><span class="pip"></span>Unit Count Type</label><label class="pill on" data-g="attr" data-c="af"><input type="checkbox" checked><span class="pip"></span>Item Form</label><label class="pill on" data-g="attr" data-c="am"><input type="checkbox" checked><span class="pip"></span>Material</label><label class="pill on" data-g="attr" data-c="asy"><input type="checkbox" checked><span class="pip"></span>Style</label><label class="pill on" data-g="attr" data-c="ai"><input type="checkbox" checked><span class="pip"></span>Ingredients</label><label class="pill on" data-g="attr" data-c="asc"><input type="checkbox" checked><span class="pip"></span>Scent</label><label class="pill on" data-g="attr" data-c="an"><input type="checkbox" checked><span class="pip"></span>No. of Items</label><label class="pill" data-g="attr" data-c="amod"><input type="checkbox"><span class="pip"></span>Model</label><label class="pill" data-g="attr" data-c="ahaz"><input type="checkbox"><span class="pip"></span>Hazardous Materials</label><label class="pill" data-g="attr" data-c="afo"><input type="checkbox"><span class="pip"></span>Format</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl attr">Dimensions</span><button class="btn-xs" onclick="togGrp('dims')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="dims" data-c="pkg_dim"><input type="checkbox"><span class="pip"></span>Pkg Dimension</label><label class="pill" data-g="dims" data-c="pkg_l"><input type="checkbox"><span class="pip"></span>Pkg Length</label><label class="pill" data-g="dims" data-c="pkg_w"><input type="checkbox"><span class="pip"></span>Pkg Width</label><label class="pill" data-g="dims" data-c="pkg_h"><input type="checkbox"><span class="pip"></span>Pkg Height</label><label class="pill" data-g="dims" data-c="pkg_wt"><input type="checkbox"><span class="pip"></span>Pkg Weight</label><label class="pill" data-g="dims" data-c="pkg_qty"><input type="checkbox"><span class="pip"></span>Pkg Quantity</label><label class="pill" data-g="dims" data-c="item_dim"><input type="checkbox"><span class="pip"></span>Item Dimension</label><label class="pill" data-g="dims" data-c="item_l"><input type="checkbox"><span class="pip"></span>Item Length</label><label class="pill" data-g="dims" data-c="item_w"><input type="checkbox"><span class="pip"></span>Item Width</label><label class="pill" data-g="dims" data-c="item_h"><input type="checkbox"><span class="pip"></span>Item Height</label><label class="pill" data-g="dims" data-c="item_wt"><input type="checkbox"><span class="pip"></span>Item Weight</label></div>
-      </div>
-      <div class="cg"><div class="cg-hdr"><span class="cg-lbl core">Assorted</span><button class="btn-xs" onclick="togGrp('assorted')">toggle all</button></div>
-        <div class="cg-checks"><label class="pill" data-g="assorted" data-c="rating"><input type="checkbox"><span class="pip"></span>Rating</label><label class="pill" data-g="assorted" data-c="rating_count"><input type="checkbox"><span class="pip"></span>Rating Count</label><label class="pill" data-g="assorted" data-c="buybox_pct"><input type="checkbox"><span class="pip"></span>Buy Box % 30d</label><label class="pill" data-g="assorted" data-c="return_rate"><input type="checkbox"><span class="pip"></span>Return Rate</label><label class="pill" data-g="assorted" data-c="offer_count"><input type="checkbox"><span class="pip"></span>Offer Count</label><label class="pill" data-g="assorted" data-c="gtin"><input type="checkbox"><span class="pip"></span>GTIN</label><label class="pill" data-g="assorted" data-c="is_fba"><input type="checkbox"><span class="pip"></span>Is FBA</label></div>
+      <div class="cg"><div class="cg-hdr"><span class="cg-lbl attr">Attributes</span><button class="btn-xs" onclick="togGrp('attr')">toggle all</button></div>
+        <div class="cg-checks">
+          <label class="pill on" data-g="attr" data-c="ac"><input type="checkbox" checked><span class="pip"></span>Color</label>
+          <label class="pill on" data-g="attr" data-c="as"><input type="checkbox" checked><span class="pip"></span>Size</label>
+          <label class="pill on" data-g="attr" data-c="asc"><input type="checkbox" checked><span class="pip"></span>Scent</label>
+          <label class="pill on" data-g="attr" data-c="af"><input type="checkbox" checked><span class="pip"></span>Item Form</label>
+          <label class="pill on" data-g="attr" data-c="am"><input type="checkbox" checked><span class="pip"></span>Material</label>
+          <label class="pill on" data-g="attr" data-c="ai"><input type="checkbox" checked><span class="pip"></span>Ingredients</label>
+          <label class="pill on" data-g="attr" data-c="ab"><input type="checkbox" checked><span class="pip"></span>Product Benefit</label>
+          <label class="pill on" data-g="attr" data-c="at"><input type="checkbox" checked><span class="pip"></span>Target Audience</label>
+          <label class="pill" data-g="attr" data-c="aai"><input type="checkbox"><span class="pip"></span>Active Ingredients</label>
+          <label class="pill" data-g="attr" data-c="asi"><input type="checkbox"><span class="pip"></span>Special Ingredients</label>
+          <label class="pill" data-g="attr" data-c="an"><input type="checkbox"><span class="pip"></span>No. of Items</label>
+          <label class="pill" data-g="attr" data-c="ap"><input type="checkbox"><span class="pip"></span>Pattern</label>
+          <label class="pill" data-g="attr" data-c="asy"><input type="checkbox"><span class="pip"></span>Style</label>
+          <label class="pill" data-g="attr" data-c="afo"><input type="checkbox"><span class="pip"></span>Format</label>
+          <label class="pill" data-g="attr" data-c="auv"><input type="checkbox"><span class="pip"></span>Unit Value</label>
+          <label class="pill" data-g="attr" data-c="aut"><input type="checkbox"><span class="pip"></span>Unit Type</label>
+        </div>
       </div>
     </div>
   </div>
@@ -524,7 +333,7 @@ select option{background:#0f0f2e;color:var(--text)}
 <div class="card active" id="c-snap">
   <div class="card-hdr"><div class="num">1</div><div class="card-title">Hive status snapshot</div><div class="card-st" id="st-snap">waiting</div></div>
   <div class="card-body">
-    <p style="font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.7">Upload a Hive export to see a full status breakdown — counts, percentages, average update rounds, and a breakdown by brand. <span style="color:var(--t3)">Total catalog: 12,992 items across all brands.</span></p>
+    <p style="font-size:11px;color:var(--t2);margin-bottom:12px">Upload a Hive export to see a full status breakdown — counts, percentages, average update rounds, and a breakdown by brand. <span style="color:var(--t3)">Total catalog: 12,992 items across all brands.</span></p>
     <div class="dz-grid col1" style="margin-bottom:12px">
       <div class="dz" id="dz-snap" onclick="document.getElementById('fi-snap').click()">
         <input type="file" id="fi-snap" accept=".csv,.xlsx" onchange="loadSnap(this)">
@@ -535,19 +344,19 @@ select option{background:#0f0f2e;color:var(--text)}
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Group by</label>
-        <select id="snap-group" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Group by</label>
+        <select id="snap-group" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
           <option value="Status">Status</option>
           <option value="Brand">Brand</option>
           <option value="Seller">Seller</option>
           <option value="Category">Category</option>
         </select>
       </div>
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Filter brand</label>
-        <input type="text" id="snap-brand" placeholder="All brands" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Filter brand</label>
+        <input type="text" id="snap-brand" placeholder="All brands" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
       </div>
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Filter status</label>
-        <select id="snap-status" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Filter status</label>
+        <select id="snap-status" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
           <option value="">All statuses</option>
           <option>LIVE</option><option>APPROVED</option><option>CASE_NEEDED</option>
           <option>INCOMPLETE</option><option>PENDING_CLIENT_REVIEW</option><option>NO_CONTENT</option>
@@ -584,7 +393,7 @@ select option{background:#0f0f2e;color:var(--text)}
 <div class="card active" id="c-cmp">
   <div class="card-hdr"><div class="num">1</div><div class="card-title">Compare two Hive exports</div><div class="card-st" id="st-cmp">waiting</div></div>
   <div class="card-body">
-    <p style="font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.7">Upload an earlier and a newer Hive export to see exactly what progressed, regressed, was added, or removed.</p>
+    <p style="font-size:11px;color:var(--t2);margin-bottom:12px">Upload an earlier and a newer Hive export to see exactly what progressed, regressed, was added, or removed.</p>
     <div class="dz-grid col2" style="margin-bottom:12px">
       <div class="dz" id="dz-old" onclick="document.getElementById('fi-old').click()">
         <input type="file" id="fi-old" accept=".csv,.xlsx" onchange="loadCmpFile('old',this)">
@@ -602,17 +411,17 @@ select option{background:#0f0f2e;color:var(--text)}
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Filter brand</label>
-        <input type="text" id="cmp-brand" placeholder="All brands" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Filter brand</label>
+        <input type="text" id="cmp-brand" placeholder="All brands" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
       </div>
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Filter segment</label>
-        <select id="cmp-seg" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Filter segment</label>
+        <select id="cmp-seg" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
           <option value="">All segments</option>
           <option>Blue</option><option>Green</option><option>Grey</option><option>Pink</option><option>Purple</option>
         </select>
       </div>
-      <div><label class="sec-lbl" style="display:block;margin-bottom:6px">Show changes</label>
-        <select id="cmp-type" style="width:100%">
+      <div><label class="sec-lbl" style="display:block;margin-bottom:5px">Show changes</label>
+        <select id="cmp-type" style="width:100%;background:var(--s2);border:1px solid var(--border-em);border-radius:var(--r);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 10px;outline:none">
           <option value="">All</option>
           <option value="progressed">Progressed ↑</option>
           <option value="regressed">Regressed ↓</option>
@@ -654,15 +463,14 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════════════════
 const SEGS={
-  Blue:["ACEND","Crazy Go Nuts","Drop Stop","Ener Life","Hifas Da Terra","Magnum Coffee","ResBiotic","WEN Hair and Body Care"],
-  Green:["Aeromotive","AllDayLocks","Amazing Herbs","Animal Essentials","Auromere","Ayush","Biomic Sciences","Black Girl Sunscreen","Biolyte","C60","Caffe D'Vita","Dermaclara","Dr. Woods","Drizzle Honey","Earthbath","Giants Snacks","Giovanni","Green Garden","Happy Cappy","Jacobsen Salt Co.","JYM Supplements","Jules Destrooper","Lillebaby","Litehouse","Lotus Food","MegaGold","Moby","PetSport","Piggy Paint","Pop and Bottle","Swann Morton","Sweet Candy Company","Vida Life Science","Zaxbys"],
-  Grey:["Acure Beauty","Baby Shusher","Better Being","Briggs and Riley","Country Archer","Doctors Best","Dr Tungs","EBIN New York","Enzymedica","HuggleHounds","Hunter Fans","Instant Power","Mermade Hair","Organic India","Premier Research Labs","Promensil","Sambucol","Simplified IT","Sovereign Silver","Sweetleaf","Zhou Nutrition"],
-  Pink:["Aeromotive","Cheribundi","Childlife","DeSantis","Edward and Sons","Jack N Jill","Jovial/bionaturae","MRM Nutrition","Miltons","Natural Delights","Osem Nestle","Perry Ellis","Pure Wine","Quantum Nutrition Labs","Quinn","Real Health","SOLO","Season Brand","Simply Teras","Starwest Botanicals","Vida Life Science","Whisps","ZippyPaws"],
-  Purple:["Amrutanjan","Ancient Organics","Big Tree Farms","Bio Groom","Blue Stripes","California Pizza Kitchen","Comvita","Daelmans","Dbest","E Cloth","Flavortown","G Hughes","Good2Grow","Growth Bomb","Happy Howie's","Holy Kakow","MRM Nutrition","NaturSource","Organicville","Pertronix","Prevue Pet Products","Purifect","Renshaw","Rummo","Sky Valley","Storck","Sunfood Superfoods","Threshold Eidon","Veggiecraft","Vital","Xtreme Beauty International"]
+  Blue:["ACEND","Crazy Go Nuts","Drop Stop","Eleven","Ener Life","Hifas Da Terra","Magnum Coffee","ResBiotic","W Labs","WEN Hair and Body Care"],
+  Green:["Aeromotive","Akkermansia","AllDayLocks","Amazing Herbs","Animal Essentials","Auromere","Ayush","Biomic Sciences","Black Girl Sunscreen","Brain Armor","C60","Caffe D'Vita","Dermaclara","Dr. Woods","Drizzle Honey","Earthbath","Giants Snacks","Giovanni","Green Garden","Happy Cappy","Jacobsen Salt Co.","Jules Destrooper","Litehouse","Lotus Food","MegaGold","PetSport","Piggy Paint","Pillow Cube","Pop and Bottle","Swann Morton","Sweet Candy Company","Thrive","Vida Life Science","Zaxbys"],
+  Grey:["Acure Beauty","Baby Shusher","Better Being","Briggs and Riley","Country Archer","Doctors Best","Doctors Best SC","Dr Tungs","Enzyme Science","Enzymedica","HuggleHounds","Hunter Fans","Instant Power","JL Childress","Mermade Hair","Organic India","Premier Research Labs","Promensil","Sambucol","Simplified IT","Sovereign Silver","Sweetleaf","Zhou Nutrition"],
+  Pink:["Aeromotive","Cheribundi","Childlife","DeSantis","Edward and Sons","Jack N Jill","Jovial/bionaturae","MRM Nutrition","Miltons","Natural Delights","Osem Nestle","Perry Ellis","Quantum Nutrition Labs","Quinn","Real Health","SOLO","Season Brand","Simply Teras","Starwest Botanicals","Vida Life Science","Whisps","ZippyPaws"],
+  Purple:["Amrutanjan","Ancient Organics","Baja Jerky","Big Tree Farms","Bio Groom","Biohacking Bestie","Blue Stripes","California Pizza Kitchen","Comvita","Daelmans","Dexter-Russell","E Cloth","Fentimans","Flavortown","G Hughes","Good2Grow","Growth Bomb","Happy Howie's","Holy Kakow","MRM Nutrition","NaturSource","Oregon Growers","Organicville","Prevue Pet Products","Purifect","Renshaw","Rummo","Sky Valley","Storck","Sunfood Superfoods","Threshold Eidon","Veggiecraft","Vital","Xtreme Beauty International"]
 };
 const TOTAL_CATALOG=12992; // total items across all brands in Hive
 
-const UOM_DATA=[["Consumables","AREA_DEODORIZER","Tablet, Capsule, Wipe, Bar, Pod","Count"],["Consumables","AREA_DEODORIZER","Gel, Oil, Drop","Fl Oz"],["Consumables","AREA_DEODORIZER","Powder, Wax, Aerosol, Granule","Ounce"],["Consumables","ASTRINGENT_SUBSTANCE","Wipe, Bar, Pad","Count"],["Consumables","ASTRINGENT_SUBSTANCE","Gel, Lotion, Drop","Fl Oz"],["Consumables","ASTRINGENT_SUBSTANCE","Powder, Cream, Aerosol, Foam","Ounce"],["Consumables","ASTRINGENT_SUBSTANCE","Cream, Aerosol,Foam,Gel","Ounce, Fl Oz"],["Consumables","ASTRINGENT_SUBSTANCE","Bar","Count,Ounce"],["Consumables","ASTRINGENT_SUBSTANCE","Powder, Crystal/Stone","Ounce"],["Consumables","BABY_BOTTLE","","Ounce"],["Consumables","BABY_FORMULA","Liquid","Fl Oz"],["Consumables","BABY_FORMULA","Powder","Ounce"],["Consumables","BAKING_MIX","","Ounce"],["Consumables","BAKING_PAPER","","Count"],["Consumables","BATHING_SPONGE","","Count"],["Consumables","BATHWATER_ADDITIVE","Tablet","Count"],["Consumables","BATHWATER_ADDITIVE","Drop","Fl Oz"],["Consumables","BATHWATER_ADDITIVE","Flake, Cream, Powder, Granule","Ounce"],["Consumables","BATTERY","","Count"],["Consumables","BLEACH","Tablet, Wipe, Pac","Count"],["Consumables","BLEACH","Gel, Liquid","Fl Oz"],["Consumables","BLEACH","Powder, Cream, Aerosol","Ounce"],["Consumables","BODY_DEODORANT","Wipe","Count"],["Consumables","BODY_DEODORANT","Gel, Liquid, Lotion, Mousse","Fl Oz"],["Consumables","BODY_DEODORANT","Powder, Cream, Aerosol","Ounce"],["Consumables","BODY_DEODORANT","Cream, Mousse,  Aerosol, Gel,","Ounce, Fl Oz"],["Consumables","BODY_LUBRICANT","Wipe","Count"],["Consumables","BODY_LUBRICANT","Gel, Lotion, Oil","Fl Oz"],["Consumables","BODY_LUBRICANT","Powder, Cream, Aerosol, Balm","Ounce"],["Consumables","BODY_LUBRICANT","cream, Gel, Aerosol","Ounce, Fl Oz"],["Consumables","BOTTLE_NIPPLE","","Count"],["Consumables","BREAKFAST_CEREAL","","Ounce"],["Consumables","BREAST_PUMP","","Count"],["Consumables","CAKE","","Ounce"],["Consumables","CASSEROLES","","Count"],["Consumables","CHANGING_PAD","","Count"],["Consumables","CHANGING_PAD_COVER","","Count"],["Consumables","CHEWING_GUM","","Count"],["Consumables","CLEANING_AGENT","Wipe, Bar, Tablet, Capsule, Stick","Count"],["Consumables","CLEANING_AGENT","Gel, Liquid","Fl Oz"],["Consumables","CLEANING_AGENT","Powder, Cream, Aerosol, Foam, Paste, Granule","Ounce"],["Consumables","CLEANING_AGENT","cream,foam,paste,Aerosol,Gel","Ounce, Fl Oz"],["Consumables","CLEANING_AGENT","Bar, Tablet","Count,Ounce"],["Consumables","COFFEE","Disc, Capsule","Count"],["Consumables","COFFEE","Liquid","Fl Oz"],["Consumables","COFFEE","Whole Bean, Powder, Granule, Ground","Ounce"],["Consumables","COFFEE","Capsule,Disc","Count,Ounce"],["Consumables","CONDITIONER","Gel, Liquid, Mousse, Lotion","Fl Oz"],["Consumables","CONDITIONER","Powder, Cream, Aerosol, Balm, Foam, Bar","Ounce"],["Consumables","CONDITIONER","cream,foam, Aerosol, Gel, Mousse","Ounce, Fl Oz"],["Consumables","CONDITIONER","Bar","Count,Ounce"],["Consumables","CONDOM","","Count"],["Consumables","CONTACT_LENSES","","Count"],["Consumables","COSMETIC_POWDER","Loose, Pressed","Ounce"],["Consumables","COSMETIC_SPONGE","","Count"],["Consumables","CRACKER","","Ounce"],["Consumables","CULINARY_SALT","Crystal, Powder, Flake","Ounce"],["Consumables","DAIRY_BASED_DRINK","Liquid","Fl Oz"],["Consumables","DAIRY_BASED_DRINK","Powder","Ounce"],["Consumables","DENTAL_FLOSS","","Foot"],["Consumables","DISHWARE_PLATE","","Count"],["Consumables","DISHWASHER_DETERGENT","Bar, Pac, Capsule, Tablet","Count"],["Consumables","DISHWASHER_DETERGENT","Gel, Liquid","Fl Oz"],["Consumables","DISHWASHER_DETERGENT","Powder","Ounce"],["Consumables","DISHWASHER_DETERGENT","Tablet,Bar,","Count,Ounce"],["Consumables","DISHWASHER_DETERGENT","Gel","Ounce, Fl Oz"],["Consumables","DRINKING_STRAW","","Count"],["Consumables","DRY_SHAMPOO","Gel, Liquid","Fl Oz"],["Consumables","DRY_SHAMPOO","Powder, Cream, Aerosol, Foam, Paste, Bar","Ounce"],["Consumables","EDIBLE_OIL_ANIMAL","Liquid","Fl Oz"],["Consumables","EDIBLE_OIL_ANIMAL","Solid","Ounce"],["Consumables","ESSENTIAL_OIL","","Fl Oz"],["Consumables","EYEBROW_COLOR","Pencil, Crayon","Count"],["Consumables","EYEBROW_COLOR","Gel, Liquid","Fl Oz"],["Consumables","EYEBROW_COLOR","Powder, Cream","Ounce"],["Consumables","EYEBROW_COLOR","Crayon,Pencil","Count,Ounce"],["Consumables","EYEBROW_COLOR","cream,Gel, Liquid","Ounce, Fl Oz"],["Consumables","EYELID_COLOR","Strip, Crayon, Pencil","Count"],["Consumables","EYELID_COLOR","Gel","Fl Oz"],["Consumables","EYELID_COLOR","Powder, Cream","Ounce"],["Consumables","EYELID_COLOR","Crayon,Pencil","Count,Ounce"],["Consumables","EYELID_COLOR","cream,","Ounce, Fl Oz"],["Consumables","FABRIC_SOFTENER","Bar, Pac, Sheet","Count"],["Consumables","FABRIC_SOFTENER","Liquid","Fl Oz"],["Consumables","FABRIC_SOFTENER","Powder, Aerosol","Ounce"],["Consumables","FACE_SHAPING_MAKEUP","Pencil","Count"],["Consumables","FACE_SHAPING_MAKEUP","Gel, Oil, Drop","Fl Oz"],["Consumables","FACE_SHAPING_MAKEUP","Powder, Cream, Aerosol","Ounce"],["Consumables","FACE_SHAPING_MAKEUP","cream, Aerosol, Gel","Ounce, Fl Oz"],["Consumables","FACIAL_TISSUE","","Count"],["Consumables","FALSE_NAIL","Gel","Fl Oz"],["Consumables","FALSE_NAIL","Powder","Ounce"],["Consumables","FLASH_MEMORY","","Count"],["Consumables","FLAVORED_DRINK_CONCENTRATE","Tablet","Count"],["Consumables","FLAVORED_DRINK_CONCENTRATE","Drop","Fl Oz"],["Consumables","FLAVORED_DRINK_CONCENTRATE","Powder, Cream","Ounce"],["Consumables","FLOUR","","Ounce"],["Consumables","FOOD_COLORING","Gel, Liquid","Fl Oz"],["Consumables","FOOD_COLORING","Powder, Paste, Aerosol","Ounce"],["Consumables","FOOD_DEHYDRATOR","","Count"],["Consumables","FOOT_SCRAPER","","Count"],["Consumables","HAIR_CLEANER_CONDITIONER","Gel, Lotion","Fl Oz"],["Consumables","HAIR_CLEANER_CONDITIONER","Powder, Cream, Aerosol, Mousse, Bar","Ounce"],["Consumables","HAIR_CLIP","","Count"],["Consumables","HAIR_COLORING_AGENT","Capsule, Pencil","Count"],["Consumables","HAIR_COLORING_AGENT","Gel, Liquid, Lotion, Mousse","Fl Oz"],["Consumables","HAIR_COLORING_AGENT","Powder, Cream, Aerosol, Paste, Wax","Ounce"],["Consumables","HAIR_COLORING_AGENT","Pencil","Count,Ounce"],["Consumables","HAIR_COLORING_AGENT","cream,Aerosol,,Mousse,Gel,","Ounce, Fl Oz"],["Consumables","HAIR_REMOVAL_AGENT","Wipe, Strip","Count"],["Consumables","HAIR_REMOVAL_AGENT","Gel, Lotion, Liquid","Fl Oz"],["Consumables","HAIR_REMOVAL_AGENT","Powder, Cream, Aerosol, Paste, Wax","Ounce"],["Consumables","HAIR_REMOVAL_AGENT","cream,Aerosol, Gel","Ounce, Fl Oz"],["Consumables","HAIR_ROLLER","","Count"],["Consumables","HAIR_STYLING_AGENT","Gel, Lotion, Oil, Mousse, Drop","Fl Oz"],["Consumables","HAIR_STYLING_AGENT","Powder, Cream, Aerosol, Wax, Clay","Ounce"],["Consumables","HAIR_STYLING_AGENT","cream,mousse,Gel,Aerosol,","Ounce, Fl Oz"],["Consumables","HAIR_TIE","","Count"],["Consumables","HAIRBAND","","Count"],["Consumables","HAND_SANITIZER","Bar","Count"],["Consumables","HAND_SANITIZER","Gel, Liquid, Lotion","Fl Oz"],["Consumables","HAND_SANITIZER","Cream, Aerosol, Balm, Mousse","Ounce"],["Consumables","HERBAL_SUPPLEMENT","Caplet, Capsule, Tablet, Softgel, Gummy","Count"],["Consumables","HERBAL_SUPPLEMENT","Drop, Syrup","Fl Oz"],["Consumables","HERBAL_SUPPLEMENT","Powder, Aerosol","Ounce"],["Consumables","HERBAL_SUPPLEMENT","Capsule,Tablet","Count,Ounce"],["Consumables","HERBAL_SUPPLEMENT","Aerosol","Ounce, Fl Oz"],["Consumables","HONEY","Stick, Capsule","Count"],["Consumables","HONEY","Syrup","Fl Oz"],["Consumables","HONEY","Comb, Powder, Cream, Granule","Ounce"],["Consumables","HONEY","cream","Ounce, Fl Oz"],["Consumables","HOOKAH","","Count"],["Consumables","INCONTINENCE_PROTECTOR","","Count"],["Consumables","INSECT_REPELLENT","Band, Candle, Coil, Patch, Stick, Tablet, Wipe","Count"],["Consumables","INSECT_REPELLENT","Gel, Lotion, Oil","Fl Oz"],["Consumables","INSECT_REPELLENT","Aerosol, Cream, Granule, Powder","Ounce"],["Consumables","JERKY","Strip","Ounce"],["Consumables","JERKY","Bar, Stick","Count"],["Consumables","JUICE_AND_JUICE_DRINK","Tablet","Count"],["Consumables","JUICE_AND_JUICE_DRINK","Liquid","Fl Oz"],["Consumables","JUICE_AND_JUICE_DRINK","Powder","Ounce"],["Consumables","LAUNDRY_DETERGENT","Tablet, Pac, Bar, Capsule, Sheet","Count"],["Consumables","LAUNDRY_DETERGENT","Liquid, Gel","Fl Oz"],["Consumables","LAUNDRY_DETERGENT","Flake, Powder, Aerosol","Ounce"],["Consumables","LAUNDRY_DETERGENT","Aerosol","Ounce, Fl Oz"],["Consumables","LAUNDRY_DETERGENT","Bar,Capsule,","Count,Ounce"],["Consumables","LEAVENING_AGENT","Powder, Cream, Block","Ounce"],["Consumables","LEGUME","Whole, Powder, Granule","Ounce"],["Consumables","LIP_COLOR","Pencil, Crayon","Count"],["Consumables","LIP_COLOR","Gel, Liquid","Fl Oz"],["Consumables","LIP_COLOR","Powder, Cream","Ounce"],["Consumables","LIP_COLOR","Crayon,Pencil","Count,Ounce"],["Consumables","LIP_COLOR","cream,Gel","Ounce, Fl Oz"],["Consumables","MAKEUP_PRIMER","Gel, Oil, Lotion","Fl Oz"],["Consumables","MAKEUP_PRIMER","Powder, Cream, Aerosol","Ounce"],["Consumables","MANUAL_SHAVING_RAZOR","","Count"],["Consumables","MASCARA","Gel, Liquid","Fl Oz"],["Consumables","MASCARA","Cream","Ounce"],["Consumables","MASCARA","cream, Gel","Ounce, Fl Oz"],["Consumables","MEAL_REPLACEMENT_BEVERAGE","Liquid","Fl Oz"],["Consumables","MEAL_REPLACEMENT_BEVERAGE","Powder","Ounce"],["Consumables","MEDICAL_TEST_STRIP","","Count"],["Consumables","MEDICATION","Bar, Tablet, Capsule, Gummy, Pad,\u00a0Patch, Wipe, Band, Softgel, Caplet","Count"],["Consumables","MEDICATION","Lotion, Gel, Oil, Drop, Syrup","Fl Oz"],["Consumables","MEDICATION","Aerosol, Powder, Balm, Cream, Foam","Ounce"],["Consumables","MEDICATION","cream,,Foam, Aerosol,Gel","Ounce, Fl Oz"],["Consumables","MEDICATION","Tablet, Bar","Count,Ounce"],["Consumables","MEDICATION","Capsule","Count,Fl Oz,Ounce"],["Consumables","MENSTRUAL_CUP","","Count"],["Consumables","MILK_SUBSTITUTE","Liquid","Fl Oz"],["Consumables","MILK_SUBSTITUTE","Powder, Cream","Ounce"],["Consumables","MINERAL_SUPPLEMENT","Tablet, Capsule, Gummy, Bar, Softgel","Count"],["Consumables","MINERAL_SUPPLEMENT","Gel, Drop","Fl Oz"],["Consumables","MINERAL_SUPPLEMENT","Aerosol, Powder, Cream, Crystal","Ounce"],["Consumables","MINERAL_SUPPLEMENT","Capsule,Tablet,Bar,","Count,Ounce"],["Consumables","MINERAL_SUPPLEMENT","Cream, Aerosol,Gel,","Ounce, Fl Oz"],["Consumables","MOUTHWASH","Liquid","Fl Oz"],["Consumables","MOUTHWASH","Powder","Ounce"],["Consumables","NAIL_POLISH","Strip","Count"],["Consumables","NAIL_POLISH","Liquid, Gel","Fl Oz"],["Consumables","NAIL_POLISH_REMOVER","Pad, Wipe","Count"],["Consumables","NAIL_POLISH_REMOVER","Cream, Aerosol","Ounce"],["Consumables","NAIL_TREATMENT","Wipe","Count"],["Consumables","NAIL_TREATMENT","Gel, Drop","Fl Oz"],["Consumables","NAIL_TREATMENT","Cream, Aerosol, Powder","Ounce"],["Consumables","NON_DAIRY_CREAM","Liquid","Fl Oz"],["Consumables","NON_DAIRY_CREAM","Powder","Ounce"],["Consumables","NOODLE","","Ounce"],["Consumables","NUT_BUTTER","Bar","Count"],["Consumables","NUT_BUTTER","Powder, Paste","Ounce"],["Consumables","NUTRITIONAL_SUPPLEMENT","Tablet, Capsule, Gummy, Bar, Softgel, Caplet, Chewable","Count"],["Consumables","NUTRITIONAL_SUPPLEMENT","Gel, Liquid","Fl Oz"],["Consumables","NUTRITIONAL_SUPPLEMENT","Aerosol, Powder, Cream, Wafer, Granule, Flake","Ounce"],["Consumables","NUTRITIONAL_SUPPLEMENT","Caplet,Capsule,Gummy,Tablet,Bar,","Count,Ounce"],["Consumables","NUTRITIONAL_SUPPLEMENT","Aerosol,Cream,Gel","Ounce, Fl Oz"],["Consumables","NUTS","","Ounce"],["Consumables","ORAL_IRRIGATOR","","Count"],["Consumables","PACIFIER","","Count"],["Consumables","PACKAGED_SOUP_AND_STEW","Pac, Tablet","Count"],["Consumables","PACKAGED_SOUP_AND_STEW","Liquid","Fl Oz"],["Consumables","PACKAGED_SOUP_AND_STEW","Powder, Paste","Ounce"],["Hardlines","PAINT","Liquid, Gel, Liquid Sample","Fl Oz"],["Hardlines","PAINT","Chip Card Sample, Peel and Stick Sample","Count"],["Hardlines","PAINT","Powder, Aerosol, Wax","Ounce"],["Consumables","PASTRY","","Ounce"],["Consumables","PERSONAL_FRAGRANCE","Bar","Count"],["Consumables","PERSONAL_FRAGRANCE","Liquid, Lotion","Fl Oz"],["Consumables","PERSONAL_FRAGRANCE","Aerosol, Powder, Cream","Ounce"],["Consumables","PERSONAL_FRAGRANCE","Aerosol,cream","Ounce, Fl Oz"],["Consumables","PERSONAL_FRAGRANCE","Bar","Count,Ounce"],["Consumables","PET_FOOD","Stick, Tablet","Count"],["Consumables","PET_FOOD","Liquid","Fl Oz"],["Consumables","PET_FOOD","Powder, Pellet, Flake, Wafer, Granule, Pate","Ounce"],["Consumables","PET_FOOD","Tablet, Stick","Count,Ounce"],["Consumables","POPCORN","","Ounce"],["Consumables","PRETZEL","","Ounce"],["Consumables","PROTEIN_DRINK","Liquid","Fl Oz"],["Consumables","PROTEIN_DRINK","Powder","Ounce"],["Consumables","PROTEIN_SUPPLEMENT_POWDER","","Ounce"],["Consumables","PUFFED_SNACK","","Ounce"],["Consumables","RAZOR_BLADE_CARTRIDGE","","Count"],["Consumables","RICE_MIX","","Ounce"],["Consumables","SANITARY_NAPKIN","","Count"],["Consumables","SEAFOOD","Whole, Stick","Ounce"],["Consumables","SEASONING","Liquid","Fl Oz"],["Consumables","SEASONING","Flake, Granule, Whole, Powder, Paste, Crystal","Ounce"],["Consumables","SELF_TANNER","Wipe","Count"],["Consumables","SELF_TANNER","Drop, Serum, Mousse, Lotion, Gel, Oil","Fl Oz"],["Consumables","SELF_TANNER","Aerosol, Cream","Ounce"],["Consumables","SELF_TANNER","cream,mousse,Aerosol, Gel,","Ounce, Fl Oz"],["Consumables","SHAMPOO","Bar, Tablet","Count"],["Consumables","SHAMPOO","Gel, Liquid","Fl Oz"],["Consumables","SHAMPOO","Powder, Cream, Foam, Aerosol","Ounce"],["Consumables","SHAMPOO","cream,foam,Aerosol,Gel","Ounce, Fl Oz"],["Consumables","SHAMPOO","Bar,","Count,Ounce"],["Consumables","SHAVING_AGENT","Bar","Count"],["Consumables","SHAVING_AGENT","Oil, Lotion","Fl Oz"],["Consumables","SHAVING_AGENT","Cream, Powder, Foam","Ounce"],["Consumables","SHELLFISH","","Ounce"],["Consumables","SKIN_BLEMISH_REMOVAL_TOOL","Pen, Needle","Count"],["Consumables","SKIN_CLEANING_AGENT","Wipe, Capsule","Count"],["Consumables","SKIN_CLEANING_AGENT","Gel, Lotion, Oil, Mousse, Serum","Fl Oz"],["Consumables","SKIN_CLEANING_AGENT","Powder, Cream, Aerosol, Paste, Balm, Flake, Bar","Ounce"],["Consumables","SKIN_CLEANING_AGENT","cream,mousse,Aerosol, Gel","Ounce, Fl Oz"],["Consumables","SKIN_CLEANING_AGENT","Bar","Count,Ounce"],["Consumables","SKIN_CLEANING_WIPE","","Count"],["Consumables","SKIN_EXFOLIANT","Wipe, Capsule, Sheet, Pad","Count"],["Consumables","SKIN_EXFOLIANT","Gel, Lotion, Serum, Mousse","Fl Oz"],["Consumables","SKIN_EXFOLIANT","Powder, Cream, Aerosol, Paste, Grain, Bar","Ounce"],["Consumables","SKIN_EXFOLIANT","cream,Aerosol, Mousse,Gel","Ounce, Fl Oz"],["Consumables","SKIN_EXFOLIANT","Bar","Count,Ounce"],["Consumables","SKIN_FOUNDATION_CONCEALER","Pencil","Count"],["Consumables","SKIN_FOUNDATION_CONCEALER","Gel, Drop, Lotion, Mousse","Fl Oz"],["Consumables","SKIN_FOUNDATION_CONCEALER","Powder, Cream, Aerosol","Ounce"],["Consumables","SKIN_FOUNDATION_CONCEALER","cream,mousse, Aerosol,Gel","Ounce, Fl Oz"],["Consumables","SKIN_MOISTURIZER","Capsule","Count"],["Consumables","SKIN_MOISTURIZER","Gel, Oil, Lotion","Fl Oz"],["Consumables","SKIN_MOISTURIZER","Powder, Cream, Aerosol, Balm, Butter, Bar","Ounce"],["Consumables","SKIN_MOISTURIZER","cream, Aerosol,Gel","Ounce, Fl Oz"],["Consumables","SKIN_MOISTURIZER","Bar","Count,Ounce"],["Consumables","SKIN_SERUM","Gel, Drop","Fl Oz"],["Consumables","SKIN_SERUM","Cream, Aerosol","Ounce"],["Consumables","SKIN_TREATMENT_MASK","Sheet","Count"],["Consumables","SKIN_TREATMENT_MASK","Gel, Lotion","Fl Oz"],["Consumables","SKIN_TREATMENT_MASK","Clay, Cream, Paste, Powder, Mousse","Ounce"],["Consumables","SKIN_TREATMENT_MASK","cream,paste, Mousse, Gel,","Ounce, Fl Oz"],["Consumables","SLEEP_MASK","","Count"],["Consumables","SMOKING_PIPE","","Count"],["Consumables","SNACK_CHIP_AND_CRISP","","Ounce"],["Consumables","SNACK_MIX","","Ounce"],["Consumables","STROLLER_PROTECTION_SHIELD","","Count"],["Consumables","SUGAR","Stick, Tablet","Count"],["Consumables","SUGAR","Liquid","Fl Oz"],["Consumables","SUGAR","Crystal, Cube, Flake, Powder, Slab","Ounce"],["Consumables","SUGAR_SUBSTITUTE","Tablet","Count"],["Consumables","SUGAR_SUBSTITUTE","Liquid","Fl Oz"],["Consumables","SUNSCREEN","Wipe","Count"],["Consumables","SUNSCREEN","Gel, Lotion, Mousse, Oil, Serum","Fl Oz"],["Consumables","SUNSCREEN","Cream, Powder, Aerosol","Ounce"],["Consumables","SUNSCREEN","cream, Gel, Mousse, Aerosol","Ounce, Fl Oz"],["Consumables","SURFACE_CLEANING_WIPE","","Count"],["Consumables","SURFACE_PROTECTION_WAX","Bar","Count"],["Consumables","SURFACE_PROTECTION_WAX","Gel, Liquid","Fl Oz"],["Consumables","SURFACE_PROTECTION_WAX","Cream, Aerosol, Paste","Ounce"],["Consumables","SYRUP","Liquid","Fl Oz"],["Consumables","SYRUP","Powder","Ounce"],["Consumables","TEXTILE_DEODORIZER","Bead, Pac, Sheet","Count"],["Consumables","TEXTILE_DEODORIZER","Liquid","Fl Oz"],["Consumables","TEXTILE_DEODORIZER","Foam, Powder, Aerosol","Ounce"],["Consumables","THICKENING_AGENT","Bar, Tablet, Capsule","Count"],["Consumables","THICKENING_AGENT","Gel, Liquid","Fl Oz"],["Consumables","THICKENING_AGENT","Cream, Flake, Powder","Ounce"],["Consumables","TOOTH_CLEANING_AGENT","Bar, Capsule, Strip, Tablet","Count"],["Consumables","TOOTH_CLEANING_AGENT","Gel, Oil","Fl Oz"],["Consumables","TOOTH_CLEANING_AGENT","Powder, Cream, Aerosol, Mousse, Paste","Ounce"],["Consumables","TOOTH_CLEANING_AGENT","cream,mousse,paste, Aerosol, Gel","Ounce, Fl Oz"],["Consumables","TOOTH_CLEANING_AGENT","Bar,","Count,Ounce"],["Consumables","TOOTH_WHITENER","Strip, Tablet","Count"],["Consumables","TOOTH_WHITENER","Gel, Liquid","Fl Oz"],["Consumables","TOOTH_WHITENER","Powder, Aerosol, Paste, Mousse","Ounce"],["Consumables","TOOTHBRUSH","","Count"],["Consumables","TOOTHBRUSH_HEAD","","Count"],["Consumables","TOPICAL_HAIR_REGROWTH_TREATMENT","Gel, Oil, Lotion, Drop","Fl Oz"],["Consumables","TOPICAL_HAIR_REGROWTH_TREATMENT","Powder, Cream, Aerosol, Foam","Ounce"],["Consumables","VINEGAR","Gummy","Count"],["Consumables","VINEGAR","Syrup, Liquid, Gel","Fl Oz"],["Consumables","VINEGAR","Powder","Ounce"],["Consumables","VITAMIN","Caplet, Capsule, Tablet, Softgel, Gummy, Bar, Patch","Count"],["Consumables","VITAMIN","Oil, Drop","Fl Oz"],["Consumables","VITAMIN","Powder, Aerosol, Cream","Ounce"],["Consumables","VITAMIN","Caplet,Capsule,Gummy,Tablet, Bar,","Count,Ounce"],["Consumables","VITAMIN","Aerosol, Cream","Ounce, Fl Oz"],["Consumables","WASTE_BAG","","Count"],["Consumables","WATER","","Fl Oz"]];
 const STATUS_ORDER=["NO_CONTENT","INCOMPLETE","DRAFT","CONTENT_MANAGER_REJECTED","COMPLIANCE_REJECTED","CONTENT_MANAGER_REVIEW","PENDING_COMPLIANCE_REVIEW","PENDING_CLIENT_REVIEW","CASE_NEEDED","APPROVED","FLAT_FILE_SUBMITTED","LIVE"];
 const STATUS_CFG={
   "LIVE":                      {lbl:"Live",                    bg:"FF00C853",fg:"FFFFFFFF"},
@@ -679,21 +487,20 @@ const STATUS_CFG={
   "NO_CONTENT":                {lbl:"No Content",              bg:"FF212121",fg:"FFBDBDBD"},
 };
 const ATTR={
-  ac:"Color",ap:"Pattern",auv:"Unit Details: Unit Value",aut:"Unit Details: Unit Type",
-  af:"Item Form",am:"Material",asy:"Style",ai:"Ingredients",asc:"Scent",
-  an:"Number of Items",amod:"Model",ahaz:"Hazardous Materials",afo:"Format"
+  ac:"Color",as:"Size",asc:"Scent",af:"Item Form",am:"Material",ai:"Ingredients",
+  ab:"Product Benefit",at:"Target Audience",aai:"Active Ingredients",asi:"Special Ingredients",
+  an:"Number of Items",ap:"Pattern",asy:"Style",afo:"Format",
+  auv:"Unit Details: Unit Value",aut:"Unit Details: Unit Type"
 };
 const CF={
-  title:     {lk:"Title",                                    sk:"Title",              lbl:"Title",        w:58,max:200,min:30},
-  b1:        {lk:"Description & Features: Feature 1",        sk:"Feature Bullet 1",   lbl:"Bullet 1",     w:58,max:500,min:20},
-  b2:        {lk:"Description & Features: Feature 2",        sk:"Feature Bullet 2",   lbl:"Bullet 2",     w:58,max:500,min:20},
-  b3:        {lk:"Description & Features: Feature 3",        sk:"Feature Bullet 3",   lbl:"Bullet 3",     w:58,max:500,min:20},
-  b4:        {lk:"Description & Features: Feature 4",        sk:"Feature Bullet 4",   lbl:"Bullet 4",     w:58,max:500,min:20},
-  b5:        {lk:"Description & Features: Feature 5",        sk:"Feature Bullet 5",   lbl:"Bullet 5",     w:58,max:500,min:20},
-  b6:        {lk:"Description & Features: Feature 6",        sk:null,                 lbl:"Bullet 6",     w:58,max:500,min:20},
-  desc:      {lk:"Description & Features: Description",      sk:null,                 lbl:"Description",  w:62,max:2000,min:50},
-  short_desc:{lk:"Description & Features: Short Description",sk:null,                 lbl:"Short Desc",   w:48,max:200,min:10},
-  search:    {lk:null,                                        sk:"Suggested Search Terms",lbl:"Search Terms",w:48,max:249,min:10},
+  title:{lk:"Title",sk:"Title",lbl:"Title",w:58,max:200,min:30},
+  b1:{lk:"Description & Features: Feature 1",sk:"Feature Bullet 1",lbl:"Bullet 1",w:58,max:500,min:20},
+  b2:{lk:"Description & Features: Feature 2",sk:"Feature Bullet 2",lbl:"Bullet 2",w:58,max:500,min:20},
+  b3:{lk:"Description & Features: Feature 3",sk:"Feature Bullet 3",lbl:"Bullet 3",w:58,max:500,min:20},
+  b4:{lk:"Description & Features: Feature 4",sk:"Feature Bullet 4",lbl:"Bullet 4",w:58,max:500,min:20},
+  b5:{lk:"Description & Features: Feature 5",sk:"Feature Bullet 5",lbl:"Bullet 5",w:58,max:500,min:20},
+  desc:{lk:"Description & Features: Description",sk:null,lbl:"Description",w:62,max:2000,min:50},
+  search:{lk:null,sk:"Suggested Search Terms",lbl:"Search Terms",w:48,max:249,min:10},
 };
 function statusRank(s){return STATUS_ORDER.indexOf(s);}
 
@@ -702,17 +509,15 @@ function statusRank(s){return STATUS_ORDER.indexOf(s);}
 // ═══════════════════════════════════════════════════════════════════════════
 function cs(bg,fg,opts){
   opts=opts||{};
-  // guard against undefined/null color values
-  bg=bg||"FFFFFFFF"; fg=fg||"FF111827";
   return{
-    font:{name:"Calibri",sz:opts.sz||10,bold:!!opts.bold,italic:!!opts.italic,color:{rgb:fg}},
-    fill:{patternType:"solid",fgColor:{rgb:bg}},
+    font:{name:"Calibri",sz:opts.sz||10,bold:!!opts.bold,italic:!!opts.italic,color:{rgb:fg||"FF111827"}},
+    fill:{patternType:"solid",fgColor:{rgb:bg||"FFFFFFFF"}},
     alignment:{horizontal:opts.h||"left",vertical:opts.v||"top",wrapText:opts.wrap!==false},
     border:{top:{style:"thin",color:{rgb:opts.bc||"FFD1D5DB"}},bottom:{style:"thin",color:{rgb:opts.bc||"FFD1D5DB"}},left:{style:"thin",color:{rgb:opts.bc||"FFD1D5DB"}},right:{style:"thin",color:{rgb:opts.bc||"FFD1D5DB"}}}
   };
 }
 function hdr(bg,fg){return cs(bg,fg,{bold:true,sz:9,h:"center",v:"center",wrap:false,bc:"FF9CA3AF"});}
-function statusStyle(s){const c=STATUS_CFG[s]||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:s||"—"};return cs(c.bg||"FF6B7280",c.fg||"FFFFFFFF",{bold:true,h:"center",wrap:false,bc:"FF9CA3AF"});}
+function statusStyle(s){const c=STATUS_CFG[s]||{bg:"FF6B7280",fg:"FFFFFFFF"};return cs(c.bg,c.fg,{bold:true,h:"center",wrap:false,bc:"FF9CA3AF"});}
 function scell(ws,r,c,v,s){
   const addr=XLSX.utils.encode_cell({r,c});
   ws[addr]={v:(v===undefined||v===null)?"":v,t:typeof v==="number"?"n":"s",s:s||{}};
@@ -955,67 +760,16 @@ async function runBuild(){
     const activeAttrs=activePills.filter(c=>ATTR[c]);
     const showBrand=activePills.includes("Brand"),showASIN=activePills.includes("ASIN");
     const showStatus=activePills.includes("hive_status"),showRound=activePills.includes("hive_round");
-
-    // Keepa field key lookup for all non-content, non-attr columns
-    const EXTRA_COLS={
-      rank_cur:     {lbl:"Sales Rank",           kkey:"Sales Rank: Current",                         w:14,grp:"sales"},
-      rank_30d:     {lbl:"Rank 30d Avg",          kkey:"Sales Rank: 30 days avg.",                    w:14,grp:"sales"},
-      rank_90d:     {lbl:"Rank 90d Avg",          kkey:"Sales Rank: 90 days avg.",                    w:14,grp:"sales"},
-      list_price:   {lbl:"List Price",            kkey:"List Price: Current",                         w:13,grp:"sales"},
-      buybox_seller:{lbl:"Buy Box Seller",        kkey:"Buy Box: Buy Box Seller",                     w:20,grp:"sales"},
-      bought_month: {lbl:"Bought / Month",        kkey:"Bought in past month",                        w:14,grp:"sales"},
-      rank_30drop:  {lbl:"Rank 30d Drop %",       kkey:"Sales Rank: 30 days drop %",                  w:14,grp:"sales"},
-      img_url:      {lbl:"Main Image URL",        kkey:"Image",                                       w:40,grp:"images"},
-      img_count:    {lbl:"Image Count",           kkey:"Image Count",                                 w:12,grp:"images"},
-      has_video:    {lbl:"Has Video",             kkey:"Videos: Has Main Video",                      w:12,grp:"branded"},
-      has_aplus:    {lbl:"Has A+",                kkey:"A+ Content: Has A+ Content",                  w:12,grp:"branded"},
-      aplus_mfr:    {lbl:"Mfr A+",               kkey:"A+ Content: A+ From Manufacturer",            w:12,grp:"branded"},
-      aplus_desc:   {lbl:"A+ Description",        kkey:"A+ Content: A+ Content",                      w:40,grp:"branded"},
-      video_count:  {lbl:"Video Count",           kkey:"Videos: Video Count",                         w:12,grp:"branded"},
-      store_name:   {lbl:"Brand Store",           kkey:"Brand Store Name",                            w:20,grp:"branded"},
-      store_url:    {lbl:"Store URL",             kkey:"Brand Store URL",                             w:30,grp:"branded"},
-      upc:          {lbl:"UPC",                   kkey:"Product Codes: UPC",                          w:15,grp:"coreattr"},
-      manufacturer: {lbl:"Manufacturer",          kkey:"Manufacturer",                                w:20,grp:"coreattr"},
-      size_ca:      {lbl:"Size",                  kkey:"Size",                                        w:14,grp:"coreattr"},
-      parent_asin:  {lbl:"Parent ASIN",           kkey:"Parent ASIN",                                 w:14,grp:"variations"},
-      parent_title: {lbl:"Parent Title",          kkey:"Parent Title",                                w:40,grp:"variations"},
-      var_asins:    {lbl:"Variated ASINs",        kkey:"Variation ASINs",                             w:30,grp:"variations"},
-      var_count:    {lbl:"# In Variation",        kkey:"Variation Count",                             w:13,grp:"variations"},
-      var_attrs:    {lbl:"Variation Attributes",  kkey:"Variation Attributes",                        w:22,grp:"variations"},
-      cat_root:     {lbl:"Root Category",         kkey:"Categories: Root",                            w:22,grp:"category"},
-      cat_sub:      {lbl:"Sub-Category",          kkey:"Categories: Sub",                             w:22,grp:"category"},
-      cat_type:     {lbl:"Type",                  kkey:"Type",                                        w:16,grp:"category"},
-      cat_group:    {lbl:"Product Group",         kkey:"Product Group",                               w:16,grp:"category"},
-      cat_item_type:{lbl:"Item Type",             kkey:"Item Type",                                   w:16,grp:"category"},
-      pkg_dim:      {lbl:"Pkg Dim (cm³)",         kkey:"Package: Dimension (cm³)",                    w:14,grp:"dims"},
-      pkg_l:        {lbl:"Pkg L (cm)",            kkey:"Package: Length (cm)",                        w:12,grp:"dims"},
-      pkg_w:        {lbl:"Pkg W (cm)",            kkey:"Package: Width (cm)",                         w:12,grp:"dims"},
-      pkg_h:        {lbl:"Pkg H (cm)",            kkey:"Package: Height (cm)",                        w:12,grp:"dims"},
-      pkg_wt:       {lbl:"Pkg Wt (g)",            kkey:"Package: Weight (g)",                         w:12,grp:"dims"},
-      pkg_qty:      {lbl:"Pkg Qty",               kkey:"Package: Quantity",                           w:10,grp:"dims"},
-      item_dim:     {lbl:"Item Dim (cm³)",        kkey:"Item: Dimension (cm³)",                       w:14,grp:"dims"},
-      item_l:       {lbl:"Item L (cm)",           kkey:"Item: Length (cm)",                           w:12,grp:"dims"},
-      item_w:       {lbl:"Item W (cm)",           kkey:"Item: Width (cm)",                            w:12,grp:"dims"},
-      item_h:       {lbl:"Item H (cm)",           kkey:"Item: Height (cm)",                           w:12,grp:"dims"},
-      item_wt:      {lbl:"Item Wt (g)",           kkey:"Item: Weight (g)",                            w:12,grp:"dims"},
-      rating:       {lbl:"Rating",                kkey:"Reviews: Rating",                             w:10,grp:"assorted"},
-      rating_count: {lbl:"Rating Count",          kkey:"Reviews: Rating Count",                       w:13,grp:"assorted"},
-      buybox_pct:   {lbl:"Buy Box % 30d",         kkey:"Buy Box: % Top Seller 30 days",               w:14,grp:"assorted"},
-      return_rate:  {lbl:"Return Rate",           kkey:"Return Rate",                                 w:12,grp:"assorted"},
-      offer_count:  {lbl:"Offer Count",           kkey:"Total Offer Count",                           w:12,grp:"assorted"},
-      gtin:         {lbl:"GTIN",                  kkey:"Product Codes: GTIN",                         w:16,grp:"assorted"},
-      is_fba:       {lbl:"Is FBA",                kkey:"Buy Box: Is FBA",                             w:10,grp:"assorted"},
-    };
+    const showRankCur=activePills.includes("rank_cur"),showRank30=activePills.includes("rank_30d"),showRank90=activePills.includes("rank_90d");
 
     const colSpec=[];
     if(showBrand)   colSpec.push({id:"Brand",grp:"core",lbl:"Brand",w:18,type:"fixed",kkey:"Brand"});
     if(showASIN)    colSpec.push({id:"ASIN",grp:"core",lbl:"ASIN",w:14,type:"fixed",kkey:"ASIN"});
     if(showStatus)  colSpec.push({id:"hive_status",grp:"core",lbl:"Hive Status",w:22,type:"status"});
     if(showRound)   colSpec.push({id:"hive_round",grp:"core",lbl:"Update Round",w:13,type:"round"});
-    // All extra columns (sales, images, branded, coreattr, variations, category, dims, assorted)
-    activePills.forEach(c=>{
-      if(EXTRA_COLS[c]) colSpec.push({id:c,grp:EXTRA_COLS[c].grp,lbl:EXTRA_COLS[c].lbl,w:EXTRA_COLS[c].w,type:"extra",kkey:EXTRA_COLS[c].kkey});
-    });
+    if(showRankCur) colSpec.push({id:"rc",grp:"rank",lbl:"Rank · Current",w:14,type:"rank",kkey:"Sales Rank: Current"});
+    if(showRank30)  colSpec.push({id:"r30",grp:"rank",lbl:"Rank · 30d Avg",w:14,type:"rank",kkey:"Sales Rank: 30 days avg."});
+    if(showRank90)  colSpec.push({id:"r90",grp:"rank",lbl:"Rank · 90d Avg",w:14,type:"rank",kkey:"Sales Rank: 90 days avg."});
     activeContent.forEach(c=>colSpec.push({id:c,grp:"content",lbl:CF[c].lbl,w:CF[c].w,type:"content",fid:c}));
     activeAttrs.forEach(c=>colSpec.push({id:c,grp:"attr",lbl:ATTR[c],w:18,type:"attr",kkey:ATTR[c]}));
 
@@ -1025,38 +779,16 @@ async function runBuild(){
       const addr=XLSX.utils.encode_cell({r,c});
       ws[addr]={v:(v===undefined||v===null)?"":v,t:typeof v==="number"?"n":"s",s:s||{}};
     }
-    const GHdr={
-      core:       {bg:"FF1F3864",fg:"FFFFFFFF"},
-      sales:      {bg:"FF1B3A2A",fg:"FFFFD166"},
-      content:    {bg:"FF1E3A5F",fg:"FFFFFFFF"},
-      images:     {bg:"FF3A2A1E",fg:"FFFFB347"},
-      branded:    {bg:"FF2A1E3A",fg:"FFCBA6F7"},
-      coreattr:   {bg:"FF1F3864",fg:"FFADD8E6"},
-      variations: {bg:"FF1A2A3A",fg:"FF87CEEB"},
-      category:   {bg:"FF1E2A1A",fg:"FF90EE90"},
-      attr:       {bg:"FF4A1D96",fg:"FFFFFFFF"},
-      dims:       {bg:"FF2A2A1E",fg:"FFFFFFAA"},
-      assorted:   {bg:"FF2A1A1A",fg:"FFFFAAAA"},
-    };
-    const GLabel={
-      core:"",sales:"Sales",content:"Content  ·  Row 1 = Suggested (Hive)  ·  Row 2 = Live (Amazon)  ·  Row 3 = Tasks",
-      images:"Images",branded:"Branded Content",coreattr:"Core Attributes",
-      variations:"Variations",category:"Category",attr:"Detail Attributes",
-      dims:"Dimensions",assorted:"Assorted",
-    };
-    const GHdrFallback={bg:"FF374151",fg:"FFFFFFFF"};
+    const GHdr={core:{bg:"FF1F3864",fg:"FFFFFFFF"},rank:{bg:"FFFFF3CD",fg:"FF7D5A00"},content:{bg:"FF1E3A5F",fg:"FFFFFFFF"},attr:{bg:"FF4A1D96",fg:"FFFFFFFF"}};
+    const GLabel={core:"",rank:"Sales Rank",content:"Content  ·  Row 1 = Suggested (Hive)  ·  Row 2 = Live (Amazon)  ·  Row 3 = Tasks",attr:"Attributes"};
     let prevG=null;
     colSpec.forEach((col,ci)=>{
       const g=col.grp;
-      const gh=GHdr[g]||GHdrFallback;
       const lbl=g!==prevG?(GLabel[g]||""):"";
-      sc(0,ci,lbl,hdr(gh.bg,gh.fg));
+      sc(0,ci,lbl,hdr(GHdr[g].bg,GHdr[g].fg));
       prevG=g;
     });
-    colSpec.forEach((col,ci)=>{
-      const gh=GHdr[col.grp]||GHdrFallback;
-      sc(1,ci,col.lbl,hdr(gh.bg,gh.fg));
-    });
+    colSpec.forEach((col,ci)=>sc(1,ci,col.lbl,hdr(GHdr[col.grp].bg,GHdr[col.grp].fg)));
 
     let issueTotal=0,maxRow=1;
     kRows.forEach((kRow,ri)=>{
@@ -1069,11 +801,10 @@ async function runBuild(){
       maxRow=rC;
       const taskParts=[];
       colSpec.forEach((col,ci)=>{
-        if(col.type==="fixed"||col.type==="rank"||col.type==="extra"){
+        if(col.type==="fixed"||col.type==="rank"){
           const raw=kRow[col.kkey];
-          const isRank=col.type==="rank"||(col.id==="rank_cur"||col.id==="rank_30d"||col.id==="rank_90d");
-          const v=isRank?(raw?fmtRank(raw):""):(raw||"");
-          sc(rA,ci,v,cs("FFDBEAFE","FF1E3A5F",{bold:isRank,wrap:col.type==="extra",bc:"FF93C5FD"}));
+          const v=col.type==="rank"?(raw?fmtRank(raw):""):(raw||"");
+          sc(rA,ci,v,cs("FFDBEAFE","FF1E3A5F",{bold:col.type==="rank",wrap:false,bc:"FF93C5FD"}));
           sc(rB,ci,"",cs("FFF0FDF4","FF166534",{wrap:false,bc:"FF86EFAC"}));
           sc(rC,ci,"",cs("FFFEFCE8","FF713F12",{wrap:false,bc:"FFFDE068"}));
         }else if(col.type==="status"){
@@ -1227,7 +958,7 @@ async function runBuild(){
       const hRow=hMap[asin]||{};
       const hasHive=!!hMap[asin];
       const hiveStatus=hasHive?String(hRow["Status"]||"").trim():"—";
-      const statusCfg=STATUS_CFG[hiveStatus]||{lbl:hiveStatus||"—",bg:"FF6B7280",fg:"FFFFFFFF"};
+      const statusCfg=STATUS_CFG[hiveStatus]||{lbl:hiveStatus,bg:"FF6B7280",fg:"FFFFFFFF"};
       const rank=fmtRank(kRow["Sales Rank: Current"]);
 
       // Compute per-field action for each copy column
@@ -1355,7 +1086,7 @@ async function runBuild(){
       [asin,brand,rank,hiveStatus,state,action,preview].forEach((v,ci)=>{
         const styles=[
           cs(alt,"FF111827",{bc:"FFE5E7EB"}),cs(alt,"FF111827",{bc:"FFE5E7EB"}),cs(alt,"FF111827",{h:"center",bc:"FFE5E7EB"}),
-          (()=>{const cfg=STATUS_CFG[hiveStatus]||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:"—"};return cs(cfg.bg,cfg.fg,{bold:true,h:"center",bc:"FF9CA3AF"});})(),
+          (()=>{const cfg=STATUS_CFG[hiveStatus]||{bg:"FF6B7280",fg:"FFFFFFFF"};return cs(cfg.bg,cfg.fg,{bold:true,h:"center",bc:"FF9CA3AF"});})(),
           stateSty,cs(alt,"FF374151",{bc:"FFE5E7EB"}),cs(alt,"FF6B7280",{wrap:true,bc:"FFE5E7EB"}),
         ];
         const addr=XLSX.utils.encode_cell({r:stRow,c:ci});
@@ -1370,27 +1101,6 @@ async function runBuild(){
     stws["!freeze"]={xSplit:0,ySplit:1};
     XLSX.utils.book_append_sheet(wb,stws,"Search Terms");
 
-    // ── UOM REFERENCE SHEET ──────────────────────────────────────────────────
-    const uomws={};
-    ["PL","Product Type","Item Form","Unit Count Type (US)"].forEach((h,ci)=>
-      scell(uomws,0,ci,h,hdr("FF1E1B4B","FFFFFFFF"))
-    );
-    UOM_DATA.forEach(([pl,pt,forms,uct],ri)=>{
-      const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
-      const uomBg=uct==="Count"?"FFDBEAFE":uct==="Fl Oz"?"FFE0F2FE":uct==="Ounce"?"FFFEF9C3":"FFF0FDF4";
-      const uomFg=uct==="Count"?"FF1E3A5F":uct==="Fl Oz"?"FF0C4A6E":uct==="Ounce"?"FF713F12":"FF14532D";
-      scell(uomws,ri+1,0,pl,  cs(alt,"FF6B7280",{bc:"FFE5E7EB"}));
-      scell(uomws,ri+1,1,pt,  cs(alt,"FF111827",{bold:true,bc:"FFE5E7EB"}));
-      scell(uomws,ri+1,2,forms,cs(alt,"FF374151",{bc:"FFE5E7EB"}));
-      scell(uomws,ri+1,3,uct,  cs(uomBg,uomFg,{bold:true,h:"center",bc:"FFE5E7EB"}));
-    });
-    uomws["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:UOM_DATA.length,c:3}});
-    uomws["!cols"]=[{wch:14},{wch:30},{wch:40},{wch:22}];
-    uomws["!rows"]=[{hpt:22}];
-    for(let i=1;i<=UOM_DATA.length;i++)uomws["!rows"][i]={hpt:18};
-    uomws["!freeze"]={xSplit:0,ySplit:1};
-    XLSX.utils.book_append_sheet(wb,uomws,"UOM Reference");
-
     setP(96);await tick();
     const fileSegLabel=STE.seg==="All"?"All_Segments":STE.activeSegs.size>1?[...STE.activeSegs].join("_"):STE.seg;
     STE.builtWB=wb;STE.builtName=fileSegLabel+"_Content_Sheet.xlsx";
@@ -1400,7 +1110,7 @@ async function runBuild(){
 
     const displayLabel=STE.seg==="All"?"All segments":STE.activeSegs.size>1?[...STE.activeSegs].join(" + ")+" segments":STE.seg+" segment";
     document.getElementById("r-title").textContent=displayLabel+" sheet ready";
-    document.getElementById("r-sub").textContent=STE.builtName+" · Tab 1: Main · Tab 2: Issues · Tab 3: Search Terms · Tab 4: UOM Ref";
+    document.getElementById("r-sub").textContent=STE.builtName+" · Tab 1: Main · Tab 2: Issues · Tab 3: Search Terms";
     document.getElementById("r-total").textContent=kRows.length.toLocaleString();
     document.getElementById("r-hive").textContent=hiveCount.toLocaleString();
     document.getElementById("r-brands").textContent=new Set(kRows.map(r=>r["Brand"])).size;
@@ -1547,7 +1257,7 @@ function runSnapshot(){
       let tbl=`<table class="rpt-table"><thead><tr><th>${groupBy}</th><th>Count</th><th>% Total</th>${groupBy==="Status"?"<th>Avg Round</th>":""}</tr></thead><tbody>`;
       sorted.slice(0,15).forEach(([key,cnt])=>{
         const pct=((cnt/total)*100).toFixed(1);
-        const cfg=STATUS_CFG[key]||null;
+        const cfg=STATUS_CFG[key];
         const badge=cfg?`<span class="s-badge" style="background:#${cfg.bg.slice(2)};color:#${cfg.fg.slice(2)}">${cfg.lbl}</span>`:esc(key);
         tbl+=`<tr><td>${badge}</td><td style="text-align:center">${cnt.toLocaleString()}</td><td style="text-align:center">${pct}%</td>${groupBy==="Status"?`<td style="text-align:center">${roundAvg[key]||"—"}</td>`:""}</tr>`;
       });
@@ -1705,7 +1415,7 @@ function runCompare(){
         const d=statusDelta[s];if(d.old===0&&d.new===0)return;
         const delta=d.delta;
         const arrow=delta>0?`<span class="delta-up">↑ +${delta}</span>`:delta<0?`<span class="delta-dn">↓ ${delta}</span>`:`<span class="delta-neu">→</span>`;
-        const cfg=STATUS_CFG[s]||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:s};
+        const cfg=STATUS_CFG[s]||{bg:"6B7280",fg:"FFFFFF",lbl:s};
         tbl+=`<tr><td><span class="s-badge" style="background:#${cfg.bg.slice(2)};color:#${cfg.fg.slice(2)}">${cfg.lbl}</span></td><td style="text-align:center">${d.old.toLocaleString()}</td><td style="text-align:center">${d.new.toLocaleString()}</td><td style="text-align:center">${arrow}</td></tr>`;
       });
       tbl+="</tbody></table>";
