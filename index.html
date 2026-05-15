@@ -1417,8 +1417,6 @@ async function runBuild(){
     btn.innerHTML="Build sheet";btn.disabled=false;
   }
 }
-function dl(){if(STE.builtWB)XLSX.writeFile(STE.builtWB,STE.builtName);}
-
 // ═══════════════════════════════════════════════════════════════════════════
 // CSV PARSER (for snapshot / compare)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1485,7 +1483,11 @@ function runSnapshot(){
       }
       // By month
       const byMonth={};
-      rows.forEach(r=>{if(!r.Created)return;const m=r.Created.slice(0,r.Created.lastIndexOf("/"));byMonth[m]=(byMonth[m]||0)+1;});
+      rows.forEach(r=>{
+        const m=parseCreatedMonth(r.Created);
+        if(!m)return;
+        byMonth[m]=(byMonth[m]||0)+1;
+      });
       setP(50);
       // Build Excel
       const wb=XLSX.utils.book_new();
@@ -1612,7 +1614,11 @@ function runCompare(){
         else{
           oldStatus=o.Status;newStatus=n.Status;brand=n.Brand;title=n.Title;
           if(oldStatus===newStatus)changeType="unchanged";
-          else{const or=statusRank(oldStatus),nr=statusRank(newStatus);changeType=nr>or?"progressed":nr<or?"regressed":"changed";}
+          else{
+            const or=statusRank(oldStatus),nr=statusRank(newStatus);
+            if(or===-1||nr===-1)changeType="changed";
+            else changeType=nr>or?"progressed":nr<or?"regressed":"changed";
+          }
         }
         changes.push({asin,changeType,oldStatus:oldStatus||"",newStatus:newStatus||"",brand:brand||"",title:title||"",oldRound:o?o["Update Round"]:"",newRound:n?n["Update Round"]:""});
       });
@@ -1728,6 +1734,18 @@ function dlCmp(){if(STE.cmpWB)XLSX.writeFile(STE.cmpWB,"Hive_Comparison_Report.x
 function dl(){if(STE.builtWB)XLSX.writeFile(STE.builtWB,STE.builtName);}
 function fmtRank(v){try{return Math.round(parseFloat(v)).toLocaleString();}catch(e){return String(v);}}
 function tick(){return new Promise(r=>setTimeout(r,0));}
+function parseCreatedMonth(v){
+  if(v===undefined||v===null)return null;
+  const s=String(v).trim();
+  if(!s)return null;
+  if(s.includes("/")){
+    const idx=s.lastIndexOf("/");
+    if(idx>0)return s.slice(0,idx);
+  }
+  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return `${m[1]}-${m[2]}`;
+  return null;
+}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function showErr(m){const e=document.getElementById("err-box");e.textContent=m;e.classList.add("show");}
 
