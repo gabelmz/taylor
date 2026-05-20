@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Segment Sheet Builder · Luminize</title>
+<title>Segment Dashboard Generator · Luminize</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
@@ -356,8 +356,8 @@ select option{background:#0f0f2e;color:var(--text)}
 <div class="shell">
 <header class="hdr">
   <div class="badge"><span class="badge-dot"></span>Content Ops · Luminize</div>
-  <h1>Segment Sheet Builder</h1>
-  <p class="sub">Build 3-row-per-ASIN content sheets, run status reports, or compare two Hive exports — all from your segment data.</p>
+  <h1>Segment Dashboard Generator</h1>
+  <p class="sub">Generate segment dashboards, run status snapshots, and compare Hive exports — all from your segment data in one place.</p>
 </header>
 
 <div class="mode-tabs">
@@ -384,21 +384,21 @@ select option{background:#0f0f2e;color:var(--text)}
     <p class="src-hint" id="src-hint">Keepa = live Amazon data &nbsp;·&nbsp; Hive = suggested copy (source of truth)</p>
     <div class="dz-grid col2" id="dz-grid">
       <div class="dz" id="dz-k" onclick="document.getElementById('fi-k').click()">
-        <input type="file" id="fi-k" accept=".xlsx,.tsv,.csv" onchange="loadFileSlot('keepa',this)">
+        <input type="file" id="fi-k" accept=".xlsx,.tsv,.csv" onchange="loadFileSlot('keepa',this)" onclick="event.stopPropagation()">
         <div class="dz-ico" id="dz-k-ico">⬇</div>
         <div class="dz-lbl">Keepa export</div>
         <div class="dz-tag">.xlsx · .tsv</div>
         <div class="dz-hint" id="dz-k-hint">Sales rank, content, attributes</div>
       </div>
       <div class="dz" id="dz-h" onclick="document.getElementById('fi-h').click()">
-        <input type="file" id="fi-h" accept=".csv,.xlsx" onchange="loadFileSlot('hive',this)">
+        <input type="file" id="fi-h" accept=".csv,.xlsx" onchange="loadFileSlot('hive',this)" onclick="event.stopPropagation()">
         <div class="dz-ico" id="dz-h-ico">⬇</div>
         <div class="dz-lbl">Hive CSV</div>
         <div class="dz-tag">.csv</div>
         <div class="dz-hint" id="dz-h-hint">Suggested copy, statuses</div>
       </div>
       <div class="dz disabled" id="dz-x" onclick="if(STE.srcEnabled.extra)document.getElementById('fi-x').click()">
-        <input type="file" id="fi-x" accept=".xlsx,.csv,.tsv" onchange="loadFileSlot('extra',this)" disabled>
+        <input type="file" id="fi-x" accept=".xlsx,.csv,.tsv" onchange="loadFileSlot('extra',this)" onclick="event.stopPropagation()" disabled>
         <div class="dz-ico" id="dz-x-ico">⬇</div>
         <div class="dz-lbl">Additional file</div>
         <div class="dz-tag">.xlsx · .csv · .tsv</div>
@@ -418,7 +418,7 @@ select option{background:#0f0f2e;color:var(--text)}
       <button class="seg-btn" data-seg="Green"  onclick="pickSeg('Green')">Green<span class="seg-count">34 brands</span></button>
       <button class="seg-btn" data-seg="Grey"   onclick="pickSeg('Grey')">Grey<span class="seg-count">21 brands</span></button>
       <button class="seg-btn" data-seg="Pink"   onclick="pickSeg('Pink')">Pink<span class="seg-count">23 brands</span></button>
-      <button class="seg-btn" data-seg="Purple" onclick="pickSeg('Purple')">Purple<span class="seg-count">31 brands</span></button>
+      <button class="seg-btn" data-seg="Purple" onclick="pickSeg('Purple')">Purple<span class="seg-count">29 brands</span></button>
       <button class="seg-btn seg-all" data-seg="All" onclick="pickAll()">All<span class="seg-count">5 segments</span></button>
     </div>
     <hr class="div">
@@ -527,7 +527,7 @@ select option{background:#0f0f2e;color:var(--text)}
     <p style="font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.7">Upload a Hive export to see a full status breakdown — counts, percentages, average update rounds, and a breakdown by brand. <span style="color:var(--t3)">Total catalog: 12,992 items across all brands.</span></p>
     <div class="dz-grid col1" style="margin-bottom:12px">
       <div class="dz" id="dz-snap" onclick="document.getElementById('fi-snap').click()">
-        <input type="file" id="fi-snap" accept=".csv,.xlsx" onchange="loadSnap(this)">
+        <input type="file" id="fi-snap" accept=".csv,.xlsx" onchange="loadSnap(this)" onclick="event.stopPropagation()">
         <div class="dz-ico" id="dz-snap-ico">⬇</div>
         <div class="dz-lbl">Hive export</div>
         <div class="dz-tag">.csv</div>
@@ -587,14 +587,14 @@ select option{background:#0f0f2e;color:var(--text)}
     <p style="font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.7">Upload an earlier and a newer Hive export to see exactly what progressed, regressed, was added, or removed.</p>
     <div class="dz-grid col2" style="margin-bottom:12px">
       <div class="dz" id="dz-old" onclick="document.getElementById('fi-old').click()">
-        <input type="file" id="fi-old" accept=".csv,.xlsx" onchange="loadCmpFile('old',this)">
+        <input type="file" id="fi-old" accept=".csv,.xlsx" onchange="loadCmpFile('old',this)" onclick="event.stopPropagation()">
         <div class="dz-ico" id="dz-old-ico">⬇</div>
         <div class="dz-lbl">Earlier export</div>
         <div class="dz-tag">baseline · before</div>
         <div class="dz-hint" id="dz-old-hint">.csv</div>
       </div>
       <div class="dz" id="dz-new" onclick="document.getElementById('fi-new').click()">
-        <input type="file" id="fi-new" accept=".csv,.xlsx" onchange="loadCmpFile('new',this)">
+        <input type="file" id="fi-new" accept=".csv,.xlsx" onchange="loadCmpFile('new',this)" onclick="event.stopPropagation()">
         <div class="dz-ico" id="dz-new-ico">⬇</div>
         <div class="dz-lbl">Newer export</div>
         <div class="dz-tag">current · after</div>
@@ -658,7 +658,7 @@ const SEGS={
   Green:["Aeromotive","AllDayLocks","Amazing Herbs","Animal Essentials","Auromere","Ayush","Biomic Sciences","Black Girl Sunscreen","Biolyte","C60","Caffe D'Vita","Dermaclara","Dr. Woods","Drizzle Honey","Earthbath","Giants Snacks","Giovanni","Green Garden","Happy Cappy","Jacobsen Salt Co.","JYM Supplements","Jules Destrooper","Lillebaby","Litehouse","Lotus Food","MegaGold","Moby","PetSport","Piggy Paint","Pop and Bottle","Swann Morton","Sweet Candy Company","Vida Life Science","Zaxbys"],
   Grey:["Acure Beauty","Baby Shusher","Better Being","Briggs and Riley","Country Archer","Doctors Best","Dr Tungs","EBIN New York","Enzymedica","HuggleHounds","Hunter Fans","Instant Power","Mermade Hair","Organic India","Premier Research Labs","Promensil","Sambucol","Simplified IT","Sovereign Silver","Sweetleaf","Zhou Nutrition"],
   Pink:["Aeromotive","Cheribundi","Childlife","DeSantis","Edward and Sons","Jack N Jill","Jovial/bionaturae","MRM Nutrition","Miltons","Natural Delights","Osem Nestle","Perry Ellis","Pure Wine","Quantum Nutrition Labs","Quinn","Real Health","SOLO","Season Brand","Simply Teras","Starwest Botanicals","Vida Life Science","Whisps","ZippyPaws"],
-  Purple:["Amrutanjan","Ancient Organics","Big Tree Farms","Bio Groom","Blue Stripes","California Pizza Kitchen","Comvita","Daelmans","Dbest","E Cloth","Flavortown","G Hughes","Good2Grow","Growth Bomb","Happy Howie's","Holy Kakow","MRM Nutrition","NaturSource","Organicville","Pertronix","Prevue Pet Products","Purifect","Renshaw","Rummo","Sky Valley","Storck","Sunfood Superfoods","Threshold Eidon","Veggiecraft","Vital","Xtreme Beauty International"]
+  Purple:["Amrutanjan","Ancient Organics","Big Tree Farms","Bio Groom","California Pizza Kitchen","Comvita","Daelmans","Dbest","E Cloth","Flavortown","G Hughes","Good2Grow","Growth Bomb","Happy Howie's","Holy Kakow","MRM Nutrition","Organicville","Pertronix","Prevue Pet Products","Purifect","Renshaw","Rummo","Sky Valley","Storck","Sunfood Superfoods","Threshold Eidon","Veggiecraft","Vital","Xtreme Beauty International"]
 };
 const TOTAL_CATALOG=12992; // total items across all brands in Hive
 
@@ -717,20 +717,27 @@ function scell(ws,r,c,v,s){
   const addr=XLSX.utils.encode_cell({r,c});
   ws[addr]={v:(v===undefined||v===null)?"":v,t:typeof v==="number"?"n":"s",s:s||{}};
 }
+// ── Luminize brand palette for Excel output ─────────────────────────────────
+// Dark navy: #1B2A4A  Purple: #5C2D91  White: #FFFFFF  Light grey: #F5F6FA
+// Action colours follow Amazon convention: orange=attention, green=good, red=issue
 const B={
-  SUGG_BASE:{bg:"FFDBEAFE",fg:"FF1E3A5F",bc:"FF93C5FD"},
-  LIVE_MATCH:{bg:"FFDCFCE7",fg:"FF14532D",bc:"FF86EFAC"},
-  LIVE_DIFF:{bg:"FFFEE2E2",fg:"FF991B1B",bc:"FFFCA5A5"},
-  LIVE_EMPTY:{bg:"FFFEF9C3",fg:"FF854D0E",bc:"FFFDE047"},
-  LIVE_NO_HIVE:{bg:"FFF9FAFB",fg:"FF6B7280",bc:"FFE5E7EB"},
-  SUGG_SHORT:{bg:"FFEDE9FE",fg:"FF4C1D95",bc:"FFC4B5FD"},
-  SUGG_EMPTY:{bg:"FFF3F4F6",fg:"FF6B7280",bc:"FFE5E7EB"},
-  ATTR_OK:{bg:"FFDBEAFE",fg:"FF1E40AF",bc:"FF93C5FD"},
-  ATTR_MISS:{bg:"FFFEE2E2",fg:"FF991B1B",bc:"FFFCA5A5"},
-  TASK_HAS:{bg:"FFFEF9C3",fg:"FF713F12",bc:"FFFDE068"},
-  TASK_NONE:{bg:"FFF0FDF4",fg:"FF166534",bc:"FFBBF7D0"},
-  TASK_ATTR:{bg:"FFFEE2E2",fg:"FF991B1B",bc:"FFFCA5A5"},
-  GHOST:{bg:"FFF8F8FA",fg:"FFD1D5DB",bc:"FFE5E7EB"},
+  // Row 1 — Suggested (Hive) — Luminize navy tint
+  SUGG_BASE:    {bg:"FFE8EDF5",fg:"FF1B2A4A",bc:"FFC5D0E6"},
+  SUGG_EMPTY:   {bg:"FFF5F6FA",fg:"FF8A94A6",bc:"FFD8DCE8"},
+  // Row 2 — Live (Amazon) — status-coded
+  LIVE_MATCH:   {bg:"FFE6F4EA",fg:"FF1E6B2E",bc:"FFB0DAB9"},  // green — matches
+  LIVE_DIFF:    {bg:"FFFCE8E6",fg:"FF8B2500",bc:"FFF5C2BB"},  // Amazon orange-red — differs
+  LIVE_EMPTY:   {bg:"FFFFF3CD",fg:"FF7A5800",bc:"FFEED88A"},  // amber — empty on listing
+  LIVE_NO_HIVE: {bg:"FFF5F6FA",fg:"FF8A94A6",bc:"FFD8DCE8"},  // grey — no Hive copy yet
+  // Row 3 — Tasks
+  TASK_HAS:     {bg:"FFFFF8E6",fg:"FF7A5800",bc:"FFEED88A"},  // amber task
+  TASK_NONE:    {bg:"FFE6F4EA",fg:"FF1E6B2E",bc:"FFB0DAB9"},  // green — no action needed
+  TASK_ATTR:    {bg:"FFFCE8E6",fg:"FF8B2500",bc:"FFF5C2BB"},  // red — missing attr
+  // Attributes
+  ATTR_OK:      {bg:"FFE8EDF5",fg:"FF1B2A4A",bc:"FFC5D0E6"},
+  ATTR_MISS:    {bg:"FFFCE8E6",fg:"FF8B2500",bc:"FFF5C2BB"},
+  // Misc
+  GHOST:        {bg:"FFF5F6FA",fg:"FFD0D5DE",bc:"FFD8DCE8"},
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -873,16 +880,29 @@ function renderBrands(){
     updTally();return;
   }
   const allBrands=[...segBrandsFor([...STE.activeSegs])].sort();
+  // Use data-brand attribute to avoid apostrophe/quote issues in inline onclick
   document.getElementById("brand-grid").innerHTML=allBrands.map(b=>{
     const on=STE.activeBrands.has(b);
-    return `<span class="br-chip${on?" on":""}" onclick="togBrand(this,${JSON.stringify(b)})"><span class="pip"></span>${esc(b)}</span>`;
+    return `<span class="br-chip${on?" on":""}" data-brand="${esc(b)}"><span class="pip"></span>${esc(b)}</span>`;
   }).join("");
+  // Attach click handlers via JS, not inline HTML
+  document.querySelectorAll("#brand-grid .br-chip").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const b=el.dataset.brand;
+      if(STE.activeBrands.has(b))STE.activeBrands.delete(b);
+      else STE.activeBrands.add(b);
+      el.classList.toggle("on",STE.activeBrands.has(b));
+      el.querySelector(".pip").style.background=STE.activeBrands.has(b)?"var(--indigo)":"var(--t3)";
+      updTally();checkReady();
+    });
+  });
   updTally();
 }
 function togBrand(el,b){
+  // kept for compatibility — brand clicks now handled via delegated listeners in renderBrands
   if(STE.activeBrands.has(b))STE.activeBrands.delete(b);else STE.activeBrands.add(b);
   el.classList.toggle("on",STE.activeBrands.has(b));
-  el.querySelector(".pip").style.background=STE.activeBrands.has(b)?"var(--accent)":"var(--t3)";
+  el.querySelector(".pip").style.background=STE.activeBrands.has(b)?"var(--indigo)":"var(--t3)";
   updTally();checkReady();
 }
 function brandAll(){segBrandsFor([...STE.activeSegs]).forEach(b=>STE.activeBrands.add(b));renderBrands();checkReady();}
@@ -1025,18 +1045,19 @@ async function runBuild(){
       const addr=XLSX.utils.encode_cell({r,c});
       ws[addr]={v:(v===undefined||v===null)?"":v,t:typeof v==="number"?"n":"s",s:s||{}};
     }
+    // Luminize: navy #1B2A4A, purple #5C2D91, mid-navy #2C3E6B, light purple #7B4DB5
     const GHdr={
-      core:       {bg:"FF1F3864",fg:"FFFFFFFF"},
-      sales:      {bg:"FF1B3A2A",fg:"FFFFD166"},
-      content:    {bg:"FF1E3A5F",fg:"FFFFFFFF"},
-      images:     {bg:"FF3A2A1E",fg:"FFFFB347"},
-      branded:    {bg:"FF2A1E3A",fg:"FFCBA6F7"},
-      coreattr:   {bg:"FF1F3864",fg:"FFADD8E6"},
-      variations: {bg:"FF1A2A3A",fg:"FF87CEEB"},
-      category:   {bg:"FF1E2A1A",fg:"FF90EE90"},
-      attr:       {bg:"FF4A1D96",fg:"FFFFFFFF"},
-      dims:       {bg:"FF2A2A1E",fg:"FFFFFFAA"},
-      assorted:   {bg:"FF2A1A1A",fg:"FFFFAAAA"},
+      core:       {bg:"FF1B2A4A",fg:"FFFFFFFF"},
+      sales:      {bg:"FF2C3E6B",fg:"FFFFFFFF"},
+      content:    {bg:"FF5C2D91",fg:"FFFFFFFF"},
+      images:     {bg:"FF2C3E6B",fg:"FFFFFFFF"},
+      branded:    {bg:"FF3D2070",fg:"FFFFFFFF"},
+      coreattr:   {bg:"FF1B2A4A",fg:"FFFFFFFF"},
+      variations: {bg:"FF2C3E6B",fg:"FFFFFFFF"},
+      category:   {bg:"FF1B2A4A",fg:"FFFFFFFF"},
+      attr:       {bg:"FF3D2070",fg:"FFFFFFFF"},
+      dims:       {bg:"FF2C3E6B",fg:"FFFFFFFF"},
+      assorted:   {bg:"FF1B2A4A",fg:"FFFFFFFF"},
     };
     const GLabel={
       core:"",sales:"Sales",content:"Content  ·  Row 1 = Suggested (Hive)  ·  Row 2 = Live (Amazon)  ·  Row 3 = Tasks",
@@ -1123,8 +1144,213 @@ async function runBuild(){
     ws["!freeze"]={xSplit:0,ySplit:2};
 
     const wb=XLSX.utils.book_new();
-    const tabLabel=STE.seg==="All"?"All Segments":STE.activeSegs.size>1?[...STE.activeSegs].join("+")+" Segs":STE.seg+" Segment";
-    XLSX.utils.book_append_sheet(wb,ws,tabLabel.slice(0,31));
+
+    // ── SPLIT INTO TABS BY GROUP ────────────────────────────────────────────
+    // Each group with active columns gets its own tab.
+    // ASIN + Brand always anchor every tab.
+    // Content tab keeps 3-row layout; all others are clean 1-row-per-ASIN.
+
+    const GROUP_ORDER=["core","sales","content","images","branded","coreattr","variations","category","attr","dims","assorted"];
+    const GROUP_NAMES={core:"Core",sales:"Sales",content:"Content",images:"Images",branded:"Branded Content",coreattr:"Core Attributes",variations:"Variations",category:"Category",attr:"Attributes",dims:"Dimensions",assorted:"Assorted"};
+    const GROUP_HDR_BG={core:"FF1B2A4A",sales:"FF2C3E6B",content:"FF5C2D91",images:"FF2C3E6B",branded:"FF3D2070",coreattr:"FF1B2A4A",variations:"FF2C3E6B",category:"FF1B2A4A",attr:"FF3D2070",dims:"FF2C3E6B",assorted:"FF1B2A4A"};
+
+    // Helper: build a flat 1-row-per-ASIN sheet for a given set of columns
+    function buildFlatSheet(grp,cols){
+      const fws={};
+      const bgHdr=GROUP_HDR_BG[grp]||"FF1B2A4A";
+      // Header row — ASIN, Brand, Hive Status always first
+      const allCols=[
+        {id:"ASIN",   lbl:"ASIN",        w:14,type:"fixed", kkey:"ASIN"},
+        {id:"Brand",  lbl:"Brand",       w:20,type:"fixed", kkey:"Brand"},
+        {id:"status", lbl:"Hive Status", w:22,type:"status"},
+        ...cols
+      ];
+      allCols.forEach((col,ci)=>fws[XLSX.utils.encode_cell({r:0,c:ci})]={v:col.lbl,t:"s",s:hdr(bgHdr,"FFFFFFFF")});
+      kRows.forEach((kRow,ri)=>{
+        const asin=String(kRow["ASIN"]||"").trim();
+        const hRow=hMap[asin]||{};
+        const hasHive=!!hMap[asin];
+        const hiveStatus=hasHive?String(hRow["Status"]||"").trim():"";
+        const rowBg=ri%2===0?"FFFFFFFF":"FFF7F8FC";
+        allCols.forEach((col,ci)=>{
+          let v="",sty=cs(rowBg,"FF1A202C",{bc:"FFE2E8F0",wrap:false,v:"center"});
+          if(col.type==="fixed"){
+            v=kRow[col.kkey]||"";
+            sty=cs(rowBg,ci===0?"FF1B2A4A":"FF1A202C",{bold:ci===0,bc:"FFE2E8F0",wrap:false,v:"center"});
+          } else if(col.type==="status"){
+            const cfg=STATUS_CFG[hiveStatus]||{lbl:hiveStatus||"—",bg:"FF6B7280",fg:"FFFFFFFF"};
+            v=cfg.lbl; sty=cs(cfg.bg,cfg.fg,{bold:true,h:"center",wrap:false,bc:"FF9CA3AF",v:"center"});
+          } else if(col.type==="rank"||col.type==="extra"){
+            const raw=kRow[col.kkey]||"";
+            const isRank=col.type==="rank"||(col.id==="rank_cur"||col.id==="rank_30d"||col.id==="rank_90d");
+            v=isRank&&raw?fmtRank(raw):raw;
+            sty=cs(rowBg,"FF1A202C",{h:isRank?"center":"left",bc:"FFE2E8F0",wrap:false,v:"center"});
+          } else if(col.type==="content"){
+            const f=CF[col.fid];
+            v=f.sk?String((hRow[f.sk])||"").trim():"";
+            const live=f.lk?String(kRow[f.lk]||"").trim():"";
+            const sugg=v;
+            let bg=rowBg,fg="FF1A202C";
+            if(!hasHive||!sugg){bg="FFF5F6FA";fg="FF8A94A6";}
+            else if(!live){bg="FFFFF3CD";fg="FF7A5800";}
+            else if(live!==sugg){bg="FFFCE8E6";fg="FF8B2500";}
+            else{bg="FFE6F4EA";fg="FF1E6B2E";}
+            v=sugg||"(no Hive copy)";
+            sty=cs(bg,fg,{bc:"FFE2E8F0",wrap:true,v:"top"});
+          } else if(col.type==="attr"){
+            v=String(kRow[col.kkey]||"").trim();
+            const bg=v?rowBg:"FFFCE8E6",fg=v?"FF1A202C":"FF8B2500";
+            sty=cs(bg,fg,{bc:"FFE2E8F0",wrap:false,v:"center"});
+          }
+          const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});
+          fws[addr]={v:v===undefined||v===null?"":v,t:"s",s:sty};
+        });
+      });
+      fws["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:kRows.length,c:allCols.length-1}});
+      fws["!cols"]=allCols.map(c=>({wch:c.w||16}));
+      fws["!rows"]=[{hpt:24}];
+      for(let i=1;i<=kRows.length;i++)fws["!rows"][i]={hpt:20};
+      fws["!freeze"]={xSplit:2,ySplit:1};
+      return fws;
+    }
+
+    // Group the active colSpec columns by their group
+    const byGroup={};
+    colSpec.forEach(col=>{
+      if(!byGroup[col.grp])byGroup[col.grp]=[];
+      byGroup[col.grp].push(col);
+    });
+
+    // Build tabs in order — content tab keeps 3-row layout, rest are flat
+    GROUP_ORDER.forEach(grp=>{
+      if(!byGroup[grp]||!byGroup[grp].length)return;
+      const cols=byGroup[grp];
+      const tabName=(GROUP_NAMES[grp]||grp).slice(0,31);
+
+      if(grp==="content"){
+        // Content tab: original 3-row-per-ASIN format (Suggested / Live / Task)
+        const cws={};
+        function csc(r,c,v,s){const addr=XLSX.utils.encode_cell({r,c});cws[addr]={v:(v===undefined||v===null)?"":v,t:typeof v==="number"?"n":"s",s:s||{}};}
+        // Anchor cols = ASIN, Brand, Hive Status, Update Round (always first)
+        const cAnchor=[
+          {id:"ASIN",       lbl:"ASIN",         w:14, type:"fixed",  kkey:"ASIN"},
+          {id:"Brand",      lbl:"Brand",         w:22, type:"fixed",  kkey:"Brand"},
+          {id:"hive_status",lbl:"Hive Status",   w:24, type:"status"},
+          {id:"hive_round", lbl:"Update Round",  w:14, type:"round"},
+        ];
+        // Sales rank cols if selected
+        const cSales=colSpec.filter(c=>c.grp==="sales"&&(c.id==="rank_cur"||c.id==="rank_30d"||c.id==="rank_90d"));
+        const cAllCols=[...cAnchor,...cSales,...cols];
+        const cNumC=cAllCols.length;
+        // Row 0: group banner
+        cAnchor.forEach((_,ci)=>csc(0,ci,"",hdr("FF1B2A4A","FFFFFFFF")));
+        cSales.forEach((_,ci)=>csc(0,cAnchor.length+ci,"",hdr("FF2C3E6B","FFFFFFFF")));
+        cols.forEach((_,ci)=>csc(0,cAnchor.length+cSales.length+ci,ci===0?"Content  ·  Row 1 = Suggested (Hive)  ·  Row 2 = Live (Amazon)  ·  Row 3 = Task":"",hdr("FF5C2D91","FFFFFFFF")));
+        // Row 1: column names
+        cAllCols.forEach((col,ci)=>{
+          const bg=ci<cAnchor.length?"FF1B2A4A":ci<cAnchor.length+cSales.length?"FF2C3E6B":"FF5C2D91";
+          csc(1,ci,col.lbl,hdr(bg,"FFFFFFFF"));
+        });
+        // Data rows: 3 per ASIN
+        let cMaxRow=1;
+        kRows.forEach((kRow,ri)=>{
+          const asin=String(kRow["ASIN"]||"").trim();
+          const hRow=hMap[asin]||{};
+          const hasHive=!!hMap[asin];
+          const hiveStatus=hasHive?String(hRow["Status"]||"").trim():"";
+          const hiveRound=hasHive?String(hRow["Update Round"]||"").trim():"";
+          const rA=2+ri*3, rB=2+ri*3+1, rC=2+ri*3+2;
+          cMaxRow=rC;
+          cAllCols.forEach((col,ci)=>{
+            if(col.type==="fixed"){
+              const v=kRow[col.kkey]||"";
+              csc(rA,ci,v,cs("FFE8EDF5","FF1B2A4A",{wrap:false,bc:"FFC5D0E6"}));
+              csc(rB,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+              csc(rC,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+            } else if(col.type==="status"){
+              const cfg=STATUS_CFG[hiveStatus]||{lbl:hiveStatus||"—",bg:"FF6B7280",fg:"FFFFFFFF"};
+              csc(rA,ci,cfg.lbl,cs(cfg.bg,cfg.fg,{bold:true,h:"center",wrap:false,bc:"FF9CA3AF"}));
+              csc(rB,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+              csc(rC,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+            } else if(col.type==="round"){
+              csc(rA,ci,hiveRound?("Round "+hiveRound):"—",cs("FFE8EDF5","FF1B2A4A",{h:"center",wrap:false,bc:"FFC5D0E6"}));
+              csc(rB,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+              csc(rC,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+            } else if(col.type==="rank"||col.type==="extra"){
+              const raw=kRow[col.kkey]; const v=col.type==="rank"&&raw?fmtRank(raw):(raw||"");
+              csc(rA,ci,v,cs("FFE8EDF5","FF1B2A4A",{bold:col.type==="rank",h:col.type==="rank"?"center":"left",wrap:false,bc:"FFC5D0E6"}));
+              csc(rB,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+              csc(rC,ci,"",cs("FFF5F6FA","FF8A94A6",{wrap:false,bc:"FFD8DCE8"}));
+            } else if(col.type==="content"){
+              const f=CF[col.fid];
+              const sugg=f.sk?String((hRow[f.sk])||"").trim():"";
+              const live=f.lk?String(kRow[f.lk]||"").trim():"";
+              // Row A — Suggested (Hive)
+              const sStyle=(!hasHive||!sugg)?cs(B.SUGG_EMPTY.bg,B.SUGG_EMPTY.fg,{bc:B.SUGG_EMPTY.bc}):cs(B.SUGG_BASE.bg,B.SUGG_BASE.fg,{bc:B.SUGG_BASE.bc});
+              csc(rA,ci,sugg||"(no Hive copy)",sStyle);
+              // Row B — Live (Amazon)
+              let lStyle,lFlag="";
+              if(!hasHive||!sugg){lStyle=cs(B.LIVE_NO_HIVE.bg,B.LIVE_NO_HIVE.fg,{bc:B.LIVE_NO_HIVE.bc});}
+              else if(!live){lStyle=cs(B.LIVE_EMPTY.bg,B.LIVE_EMPTY.fg,{bc:B.LIVE_EMPTY.bc});lFlag="PUBLISH: "+f.lbl+" is empty — Hive copy ready";}
+              else if(live===sugg){lStyle=cs(B.LIVE_MATCH.bg,B.LIVE_MATCH.fg,{bc:B.LIVE_MATCH.bc});}
+              else{lStyle=cs(B.LIVE_DIFF.bg,B.LIVE_DIFF.fg,{bc:B.LIVE_DIFF.bc});lFlag="UPDATE "+f.lbl.toUpperCase()+": live doesn't match Hive";}
+              csc(rB,ci,live||"(empty)",lStyle);
+              // Row C — Task
+              const tasks=[];
+              if(!hasHive||!sugg)tasks.push("📝 WRITE: no "+f.lbl+" in Hive yet");
+              if(lFlag)tasks.push("🚀 "+lFlag);
+              if(tasks.length>0)csc(rC,ci,tasks.join("\n"),cs(B.TASK_HAS.bg,B.TASK_HAS.fg,{bc:B.TASK_HAS.bc}));
+              else csc(rC,ci,"✓ Live matches Hive",cs(B.TASK_NONE.bg,B.TASK_NONE.fg,{bc:B.TASK_NONE.bc}));
+            }
+          });
+        });
+        cws["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:cMaxRow,c:cNumC-1}});
+        cws["!cols"]=cAllCols.map(c=>({wch:c.w}));
+        cws["!rows"]=[{hpt:20},{hpt:26}];
+        for(let i=0;i<kRows.length;i++){cws["!rows"][2+i*3]={hpt:60};cws["!rows"][2+i*3+1]={hpt:60};cws["!rows"][2+i*3+2]={hpt:52};}
+        cws["!freeze"]={xSplit:cAnchor.length,ySplit:2};
+        XLSX.utils.book_append_sheet(wb,cws,tabName);
+      } else if(grp==="core"){
+        // Core: flat sheet — status/round columns handled as special types
+        const coreCols=cols.filter(c=>c.id!=="Brand"&&c.id!=="ASIN"&&c.id!=="hive_status");
+        // Build manually — simpler core sheet
+        const cws={};
+        const cAllCols=[
+          {id:"ASIN",       lbl:"ASIN",         w:14, type:"fixed",  kkey:"ASIN"},
+          {id:"Brand",      lbl:"Brand",        w:22, type:"fixed",  kkey:"Brand"},
+          {id:"hive_status",lbl:"Hive Status",  w:24, type:"status"},
+          {id:"hive_round", lbl:"Update Round", w:14, type:"round"},
+        ];
+        cAllCols.forEach((col,ci)=>cws[XLSX.utils.encode_cell({r:0,c:ci})]={v:col.lbl,t:"s",s:hdr("FF1B2A4A","FFFFFFFF")});
+        kRows.forEach((kRow,ri)=>{
+          const asin=String(kRow["ASIN"]||"").trim();
+          const hRow=hMap[asin]||{};
+          const hasHive=!!hMap[asin];
+          const hiveStatus=hasHive?String(hRow["Status"]||"").trim():"";
+          const hiveRound=hasHive?String(hRow["Update Round"]||"").trim():"";
+          const rowBg=ri%2===0?"FFFFFFFF":"FFF7F8FC";
+          cAllCols.forEach((col,ci)=>{
+            let v="",sty=cs(rowBg,"FF1A202C",{bc:"FFE2E8F0",wrap:false,v:"center"});
+            if(col.type==="fixed"){v=kRow[col.kkey]||"";sty=cs(rowBg,ci===0?"FF1B2A4A":"FF1A202C",{bold:ci===0,bc:"FFE2E8F0",wrap:false,v:"center"});}
+            else if(col.type==="status"){const cfg=STATUS_CFG[hiveStatus]||{lbl:hiveStatus||"—",bg:"FF6B7280",fg:"FFFFFFFF"};v=cfg.lbl;sty=cs(cfg.bg,cfg.fg,{bold:true,h:"center",wrap:false,bc:"FF9CA3AF",v:"center"});}
+            else if(col.type==="round"){v=hiveRound?("Round "+hiveRound):"—";sty=cs(rowBg,"FF5C2D91",{h:"center",bc:"FFE2E8F0",wrap:false,v:"center",bold:true});}
+            const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});
+            cws[addr]={v:v,t:"s",s:sty};
+          });
+        });
+        cws["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:kRows.length,c:cAllCols.length-1}});
+        cws["!cols"]=cAllCols.map(c=>({wch:c.w}));
+        cws["!rows"]=[{hpt:24}];
+        for(let i=1;i<=kRows.length;i++)cws["!rows"][i]={hpt:20};
+        cws["!freeze"]={xSplit:2,ySplit:1};
+        XLSX.utils.book_append_sheet(wb,cws,tabName);
+      } else {
+        // All other groups — flat sheet
+        const fws=buildFlatSheet(grp,cols);
+        XLSX.utils.book_append_sheet(wb,fws,tabName);
+      }
+    });
+
     setP(70);await tick();
 
     // ── ISSUE REPORT — one row per ASIN, tasks split by type/column ─────────
@@ -1166,9 +1392,18 @@ async function runBuild(){
     // Content copy cols: one per active copy field + optional search
     const copyColIds=[...copyFields,...(hasSearchCol?["search"]:[])];
     const copyColLabels=copyColIds.map(c=>CF[c].lbl);
-    // Attribute cols: one per active attr
-    const attrColIds=[...activeAttrs];
-    const attrColLabels=attrColIds.map(c=>ATTR[c]);
+    // Attribute cols: ALL 15 attrs always — each ASIN has different attributes
+    // required, so we ignore the column picker here and show the full set.
+    const ALL_ATTR={
+      ac:"Color", ap:"Pattern",
+      auv:"Unit Details: Unit Value", aut:"Unit Details: Unit Type",
+      af:"Item Form", am:"Material", asy:"Style", ai:"Ingredients",
+      asc:"Scent", an:"Number of Items", amod:"Model",
+      ahaz:"Hazardous Materials", afo:"Format",
+      aai:"Active Ingredients", asi:"Special Ingredients",
+    };
+    const attrColIds=Object.keys(ALL_ATTR);
+    const attrColLabels=attrColIds.map(c=>ALL_ATTR[c]);
     // Summary cols at end
     const SUMMARY_COLS=2; // "Copy Tasks" "Attr Tasks"
     const TOTAL_COLS=FIXED_COUNT+copyColIds.length+attrColIds.length+SUMMARY_COLS;
@@ -1186,10 +1421,10 @@ async function runBuild(){
     };
 
     // ── GROUP HEADER ROW (row 0) ──────────────────────────────────────────
-    const GRP_IDENTITY={bg:"FF1E3A5F",fg:"FFFFFFFF"};
-    const GRP_COPY    ={bg:"FF1565C0",fg:"FFFFFFFF"};
-    const GRP_ATTR    ={bg:"FF4A1D96",fg:"FFFFFFFF"};
-    const GRP_SUMMARY ={bg:"FF374151",fg:"FFFFFFFF"};
+    const GRP_IDENTITY={bg:"FF1B2A4A",fg:"FFFFFFFF"};
+    const GRP_COPY    ={bg:"FF5C2D91",fg:"FFFFFFFF"};
+    const GRP_ATTR    ={bg:"FF3D2070",fg:"FFFFFFFF"};
+    const GRP_SUMMARY ={bg:"FF2C3E6B",fg:"FFFFFFFF"};
 
     function grpHdr(col,label,bg,fg){
       scell(iws,0,col,label,cs(bg,fg,{bold:true,sz:9,h:"center",v:"center",wrap:false,bc:"FF9CA3AF"}));
@@ -1199,15 +1434,15 @@ async function runBuild(){
     // Merge label for copy group — just colour the cells
     copyColIds.forEach((_,i)=>grpHdr(FIXED_COUNT+i,"Copy  ·  Bucket: Content  ·  Type: Copy  ·  Sub-types per field",GRP_COPY.bg,GRP_COPY.fg));
     // Attr group
-    attrColIds.forEach((_,i)=>grpHdr(FIXED_COUNT+copyColIds.length+i,"Attributes  ·  Bucket: General Updates  ·  Type: Attribute",GRP_ATTR.bg,GRP_ATTR.fg));
+    attrColIds.forEach((_,i)=>grpHdr(FIXED_COUNT+copyColIds.length+i,i===0?"Attributes  ·  Live Value shown  ·  Green = populated  ·  Red = MISSING":"",GRP_ATTR.bg,GRP_ATTR.fg));
     // Summary group
     [0,1].forEach(i=>grpHdr(FIXED_COUNT+copyColIds.length+attrColIds.length+i,"",GRP_SUMMARY.bg,GRP_SUMMARY.fg));
 
     // ── COLUMN NAME ROW (row 1) ───────────────────────────────────────────
-    const COL_HDR_IDENTITY=hdr("FF1E3A5F","FFFFFFFF");
-    const COL_HDR_COPY    =hdr("FF1565C0","FFFFFFFF");
-    const COL_HDR_ATTR    =hdr("FF4A1D96","FFFFFFFF");
-    const COL_HDR_SUMMARY =hdr("FF374151","FFFFFFFF");
+    const COL_HDR_IDENTITY=hdr("FF1B2A4A","FFFFFFFF");
+    const COL_HDR_COPY    =hdr("FF5C2D91","FFFFFFFF");
+    const COL_HDR_ATTR    =hdr("FF3D2070","FFFFFFFF");
+    const COL_HDR_SUMMARY =hdr("FF2C3E6B","FFFFFFFF");
 
     // Fixed header names
     ["ASIN","Brand","Hive Status","Sales Rank","# Tasks","Task Bucket","Task Type"].forEach((lbl,i)=>
@@ -1215,7 +1450,7 @@ async function runBuild(){
     // Copy field headers
     copyColIds.forEach((c,i)=>scell(iws,1,FIXED_COUNT+i,CF[c].lbl,COL_HDR_COPY));
     // Attr headers
-    attrColIds.forEach((c,i)=>scell(iws,1,FIXED_COUNT+copyColIds.length+i,ATTR[c],COL_HDR_ATTR));
+    attrColIds.forEach((c,i)=>scell(iws,1,FIXED_COUNT+copyColIds.length+i,ALL_ATTR[c],COL_HDR_ATTR));
     // Summary headers
     scell(iws,1,FIXED_COUNT+copyColIds.length+attrColIds.length,  "Copy Tasks",COL_HDR_SUMMARY);
     scell(iws,1,FIXED_COUNT+copyColIds.length+attrColIds.length+1,"Attr Tasks",COL_HDR_SUMMARY);
@@ -1267,11 +1502,13 @@ async function runBuild(){
         // PUSH = ready to push = not a missing task, don't count
       });
 
-      // Compute per-attr action
+      // Compute per-attr: live value from Keepa keyed by ALL_ATTR label
       const attrActions={};
+      const attrValues={};
       let attrTaskCount=0;
       attrColIds.forEach(c=>{
-        const v=String(kRow[ATTR[c]]||"").trim();
+        const v=String(kRow[ALL_ATTR[c]]||"").trim();
+        attrValues[c]=v;
         if(!v){attrActions[c]="MISSING";attrTaskCount++;}
         else attrActions[c]="OK";
       });
@@ -1303,11 +1540,16 @@ async function runBuild(){
         scell(iws,iRow,FIXED_COUNT+i,act.label,cs(act.bg,act.fg,{bold:actKey!=="OK"&&actKey!=="BLANK",h:"center",bc:act.bc}));
       });
 
-      // Attribute columns
+      // Attribute columns — live value from Keepa + red if missing
       attrColIds.forEach((c,i)=>{
-        const actKey=attrActions[c];
-        const act=ACT[actKey]||ACT.BLANK;
-        scell(iws,iRow,FIXED_COUNT+copyColIds.length+i,act.label,cs(act.bg,act.fg,{bold:actKey==="MISSING",h:"center",bc:act.bc}));
+        const liveVal=attrValues[c];
+        const ci=FIXED_COUNT+copyColIds.length+i;
+        if(!liveVal){
+          scell(iws,iRow,ci,"MISSING",cs("FFFCE8E6","FF8B2500",{bold:true,h:"center",bc:"FFF5C2BB"}));
+        } else {
+          const display=liveVal.length>35?liveVal.slice(0,33)+"…":liveVal;
+          scell(iws,iRow,ci,display,cs("FFE6F4EA","FF1E6B2E",{wrap:true,bc:"FFB0DAB9"}));
+        }
       });
 
       // Summary columns
@@ -1323,13 +1565,13 @@ async function runBuild(){
     const iColWidths=[
       14,22,24,13,9,22,16,  // fixed
       ...copyColIds.map(()=>18),  // copy fields
-      ...attrColIds.map(()=>14),  // attrs
-      11,11,                       // summary
+      ...attrColIds.map(()=>22),  // all 15 attrs — wide enough for values
+      11,11,                      // summary
     ];
     iws["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:Math.max(iRow-1,1),c:TOTAL_COLS-1}});
     iws["!cols"]=iColWidths.map(w=>({wch:w}));
     iws["!rows"]=[{hpt:26},{hpt:26}]; // two header rows
-    for(let i=2;i<iRow;i++)iws["!rows"][i]={hpt:22};
+    for(let i=2;i<iRow;i++)iws["!rows"][i]={hpt:30};
     iws["!freeze"]={xSplit:0,ySplit:2};
     XLSX.utils.book_append_sheet(wb,iws,"Issue Report");
     setP(80);await tick();
@@ -1373,7 +1615,7 @@ async function runBuild(){
     // ── UOM REFERENCE SHEET ──────────────────────────────────────────────────
     const uomws={};
     ["PL","Product Type","Item Form","Unit Count Type (US)"].forEach((h,ci)=>
-      scell(uomws,0,ci,h,hdr("FF1E1B4B","FFFFFFFF"))
+      scell(uomws,0,ci,h,hdr("FF1B2A4A","FFFFFFFF"))
     );
     UOM_DATA.forEach(([pl,pt,forms,uct],ri)=>{
       const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
@@ -1392,8 +1634,10 @@ async function runBuild(){
     XLSX.utils.book_append_sheet(wb,uomws,"UOM Reference");
 
     setP(96);await tick();
-    const fileSegLabel=STE.seg==="All"?"All_Segments":STE.activeSegs.size>1?[...STE.activeSegs].join("_"):STE.seg;
-    STE.builtWB=wb;STE.builtName=fileSegLabel+"_Content_Sheet.xlsx";
+    const fileSegLabel=STE.seg==="All"?"All":STE.activeSegs.size>1?[...STE.activeSegs].join("_"):(STE.seg||"Segment");
+    const today=new Date();
+    const dateStr=today.toLocaleDateString("en-US",{month:"2-digit",day:"2-digit",year:"numeric"}).replace(/\//g,"-");
+    STE.builtWB=wb;STE.builtName=fileSegLabel+" Dashboard Sheet "+dateStr+".xlsx";
     setP(100);
     log("search terms",`✓ ready: ${stReady} · ⚠ blank: ${stBlank} · ❌ missing: ${stMissing}`);
     log("complete",STE.builtName+" · "+issueTotal+" ASINs have task opportunities");
@@ -1417,6 +1661,8 @@ async function runBuild(){
     btn.innerHTML="Build sheet";btn.disabled=false;
   }
 }
+function dl(){if(STE.builtWB)XLSX.writeFile(STE.builtWB,STE.builtName);}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // CSV PARSER (for snapshot / compare)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1483,18 +1729,14 @@ function runSnapshot(){
       }
       // By month
       const byMonth={};
-      rows.forEach(r=>{
-        const m=parseCreatedMonth(r.Created);
-        if(!m)return;
-        byMonth[m]=(byMonth[m]||0)+1;
-      });
+      rows.forEach(r=>{if(!r.Created)return;const m=r.Created.slice(0,r.Created.lastIndexOf("/"));byMonth[m]=(byMonth[m]||0)+1;});
       setP(50);
       // Build Excel
       const wb=XLSX.utils.book_new();
       // Summary sheet
       const ws1={};
       const hdrs=groupBy==="Status"?[groupBy,"Count","% of Filtered","Avg Update Round"]:[groupBy,"Count","% of Filtered"];
-      hdrs.forEach((h,ci)=>scell(ws1,0,ci,h,hdr("FF1F3864","FFFFFFFF")));
+      hdrs.forEach((h,ci)=>scell(ws1,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       sorted.forEach(([key,cnt],ri)=>{
         const pct=((cnt/total)*100).toFixed(1)+"%";
         const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
@@ -1513,7 +1755,7 @@ function runSnapshot(){
       // All ASINs sheet
       const ws2={};
       const cols2=["ASIN","Brand","Status","Update Round","Category","Seller","Created","Title"];
-      cols2.forEach((h,ci)=>scell(ws2,0,ci,h,hdr()));
+      cols2.forEach((h,ci)=>scell(ws2,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       rows.forEach((row,ri)=>{
         const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
         cols2.forEach((col,ci)=>{
@@ -1527,7 +1769,7 @@ function runSnapshot(){
       XLSX.utils.book_append_sheet(wb,ws2,"All ASINs");
       // By month sheet
       const ws3={};
-      ["Month Created","Count"].forEach((h,ci)=>scell(ws3,0,ci,h,hdr()));
+      ["Month Created","Count"].forEach((h,ci)=>scell(ws3,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       Object.entries(byMonth).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([m,n],ri)=>{
         const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
         scell(ws3,ri+1,0,m,cs(alt,"FF111827"));scell(ws3,ri+1,1,n,cs(alt,"FF111827",{h:"center"}));
@@ -1614,11 +1856,7 @@ function runCompare(){
         else{
           oldStatus=o.Status;newStatus=n.Status;brand=n.Brand;title=n.Title;
           if(oldStatus===newStatus)changeType="unchanged";
-          else{
-            const or=statusRank(oldStatus),nr=statusRank(newStatus);
-            if(or===-1||nr===-1)changeType="changed";
-            else changeType=nr>or?"progressed":nr<or?"regressed":"changed";
-          }
+          else{const or=statusRank(oldStatus),nr=statusRank(newStatus);changeType=nr>or?"progressed":nr<or?"regressed":"changed";}
         }
         changes.push({asin,changeType,oldStatus:oldStatus||"",newStatus:newStatus||"",brand:brand||"",title:title||"",oldRound:o?o["Update Round"]:"",newRound:n?n["Update Round"]:""});
       });
@@ -1642,7 +1880,7 @@ function runCompare(){
       const wb=XLSX.utils.book_new();
       // Status delta sheet
       const wd={};
-      ["Status","Before","After","Change","Direction"].forEach((h,ci)=>scell(wd,0,ci,h,hdr("FF1F3864","FFFFFFFF")));
+      ["Status","Before","After","Change","Direction"].forEach((h,ci)=>scell(wd,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       STATUS_ORDER.slice().reverse().forEach((s,ri)=>{
         const d=statusDelta[s];const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
         const delta=d.delta;
@@ -1658,11 +1896,104 @@ function runCompare(){
       wd["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:STATUS_ORDER.length,c:4}});
       wd["!cols"]=[{wch:26},{wch:10},{wch:10},{wch:10},{wch:14}];
       wd["!freeze"]={xSplit:0,ySplit:1};
+      // ── EXECUTIVE SUMMARY SHEET (first tab) ───────────────────────────────
+      const wsSum={};
+      function sumCell(r,c,v,s){const addr=XLSX.utils.encode_cell({r,c});wsSum[addr]={v:v===null||v===undefined?"":v,t:typeof v==="number"?"n":"s",s:s||{}};}
+      const sumTitle=cs("FF1E1B4B","FFFFFFFF",{bold:true,sz:14,h:"center",v:"center",wrap:false,bc:"FF1E1B4B"});
+      const sumSec  =cs("FF2D3748","FFFFFFFF",{bold:true,sz:10,h:"left",v:"center",wrap:false,bc:"FF4A5568"});
+      const sumLbl  =cs("FFF7FAFC","FF2D3748",{bold:true,sz:10,h:"left",v:"center",wrap:false,bc:"FFE2E8F0"});
+      const sumVal  =cs("FFFFFFFF","FF1A202C",{sz:10,h:"left",v:"center",wrap:true,bc:"FFE2E8F0"});
+      const sumUp   =cs("FFDCFCE7","FF14532D",{bold:true,sz:10,h:"center",v:"center",bc:"FF86EFAC"});
+      const sumDn   =cs("FFFEE2E2","FF991B1B",{bold:true,sz:10,h:"center",v:"center",bc:"FFFCA5A5"});
+      const sumNeu  =cs("FFFEF9C3","FF854D0E",{bold:true,sz:10,h:"center",v:"center",bc:"FFFDE047"});
+
+      let sr=0;
+      // Title block
+      sumCell(sr,0,"HIVE STATUS COMPARISON REPORT",sumTitle);
+      sumCell(sr,1,"",sumTitle);sumCell(sr,2,"",sumTitle);sumCell(sr,3,"",sumTitle);sr++;
+      sumCell(sr,0,`Generated: ${new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}`,cs("FF2D3748","FF718096",{sz:9,bc:"FF2D3748"}));
+      sumCell(sr,1,"",cs("FF2D3748","FF718096",{sz:9,bc:"FF2D3748"}));
+      sumCell(sr,2,"",cs("FF2D3748","FF718096",{sz:9,bc:"FF2D3748"}));
+      sumCell(sr,3,"",cs("FF2D3748","FF718096",{sz:9,bc:"FF2D3748"}));sr++;sr++;
+
+      // Volume overview
+      sumCell(sr,0,"VOLUME OVERVIEW",sumSec);
+      sumCell(sr,1,"",sumSec);sumCell(sr,2,"",sumSec);sumCell(sr,3,"",sumSec);sr++;
+      [
+        ["ASINs in earlier export", oldR.length],
+        ["ASINs in newer export",   newR.length],
+        ["Total unique ASINs compared", allASINs.size],
+        ["Net change in catalog size", newR.length - oldR.length],
+      ].forEach(([lbl,val])=>{
+        sumCell(sr,0,lbl,sumLbl);
+        const isNet=lbl.includes("Net");
+        const netVal=typeof val==="number"&&val>0?"+"+val:val;
+        sumCell(sr,1,isNet?netVal:val,isNet&&val>0?sumUp:isNet&&val<0?sumDn:sumVal);
+        sumCell(sr,2,"",sumVal);sumCell(sr,3,"",sumVal);sr++;
+      });sr++;
+
+      // Movement summary
+      sumCell(sr,0,"ASIN MOVEMENT",sumSec);
+      sumCell(sr,1,"",sumSec);sumCell(sr,2,"",sumSec);sumCell(sr,3,"",sumSec);sr++;
+      [
+        ["✓ Progressed (moved forward in workflow)",  progressed, "up"],
+        ["✗ Regressed (moved backward in workflow)",  regressed,  "dn"],
+        ["＋ New ASINs added to catalog",              newASINs,   "up"],
+        ["－ ASINs removed from catalog",             removed,    "dn"],
+        ["→ No status change",                        unchanged,  "neu"],
+        ["↔ Lateral/uncategorized change",           changes.filter(c=>c.changeType==="changed").length,"neu"],
+      ].forEach(([lbl,val,dir])=>{
+        sumCell(sr,0,lbl,sumLbl);
+        sumCell(sr,1,val,dir==="up"?sumUp:dir==="dn"?sumDn:sumNeu);
+        sumCell(sr,2,"",sumVal);sumCell(sr,3,"",sumVal);sr++;
+      });sr++;
+
+      // Status changes narrative
+      sumCell(sr,0,"STATUS CHANGES — WHAT MOVED",sumSec);
+      sumCell(sr,1,"",sumSec);sumCell(sr,2,"",sumSec);sumCell(sr,3,"",sumSec);sr++;
+      sumCell(sr,0,"Status",sumLbl);sumCell(sr,1,"Before",sumLbl);sumCell(sr,2,"After",sumLbl);sumCell(sr,3,"Change",sumLbl);sr++;
+      STATUS_ORDER.slice().reverse().forEach(s=>{
+        const d=statusDelta[s];if(d.old===0&&d.new===0)return;
+        const delta=d.delta;
+        const cfg=STATUS_CFG[s]||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:s};
+        sumCell(sr,0,cfg.lbl,  cs(cfg.bg,cfg.fg,{bold:true,h:"center",bc:"FF9CA3AF"}));
+        sumCell(sr,1,d.old,    cs("FFF7FAFC","FF2D3748",{h:"center",bc:"FFE2E8F0"}));
+        sumCell(sr,2,d.new,    cs("FFF7FAFC","FF2D3748",{h:"center",bc:"FFE2E8F0"}));
+        const dbg=delta>0?"FFDCFCE7":delta<0?"FFFEE2E2":"FFFFF3CD";
+        const dfg=delta>0?"FF14532D":delta<0?"FF991B1B":"FF854D0E";
+        sumCell(sr,3,(delta>0?"+":"")+delta, cs(dbg,dfg,{bold:true,h:"center",bc:"FFE2E8F0"}));sr++;
+      });sr++;
+
+      // Top transitions
+      sumCell(sr,0,"TOP STATUS TRANSITIONS (most common moves)",sumSec);
+      sumCell(sr,1,"",sumSec);sumCell(sr,2,"",sumSec);sumCell(sr,3,"",sumSec);sr++;
+      sumCell(sr,0,"From",sumLbl);sumCell(sr,1,"To",sumLbl);sumCell(sr,2,"# ASINs",sumLbl);sumCell(sr,3,"Direction",sumLbl);sr++;
+      flowSorted.slice(0,10).forEach(([key,cnt])=>{
+        const [from,to]=key.split("→");
+        const nr=statusRank(to),or2=statusRank(from);
+        const dir=nr>or2?"↑ Progressed":nr<or2?"↓ Regressed":"↔ Lateral";
+        const dbg=nr>or2?"FFDCFCE7":nr<or2?"FFFEE2E2":"FFFFF3CD";
+        const dfg=nr>or2?"FF14532D":nr<or2?"FF991B1B":"FF854D0E";
+        const cfgF=STATUS_CFG[from]||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:from};
+        const cfgT=STATUS_CFG[to]  ||{bg:"FF6B7280",fg:"FFFFFFFF",lbl:to};
+        sumCell(sr,0,cfgF.lbl,cs(cfgF.bg,cfgF.fg,{h:"center",bc:"FF9CA3AF"}));
+        sumCell(sr,1,cfgT.lbl,cs(cfgT.bg,cfgT.fg,{h:"center",bc:"FF9CA3AF"}));
+        sumCell(sr,2,cnt,      cs("FFF7FAFC","FF2D3748",{h:"center",bc:"FFE2E8F0"}));
+        sumCell(sr,3,dir,      cs(dbg,dfg,{bold:true,h:"center",bc:"FFE2E8F0"}));sr++;
+      });
+
+      wsSum["!ref"]=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:sr,c:3}});
+      wsSum["!cols"]=[{wch:46},{wch:18},{wch:18},{wch:18}];
+      wsSum["!rows"]=[];
+      for(let i=0;i<=sr;i++)wsSum["!rows"][i]={hpt:22};
+      wsSum["!rows"][0]={hpt:30};
+      XLSX.utils.book_append_sheet(wb,wsSum,"Summary");
+
       XLSX.utils.book_append_sheet(wb,wd,"Status Delta");
       // ASIN Changes sheet
       const wc={};
       const ac=["ASIN","Brand","Change Type","Status Before","Status After","Round Before","Round After","Title"];
-      ac.forEach((h,ci)=>scell(wc,0,ci,h,hdr()));
+      ac.forEach((h,ci)=>scell(wc,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       const cbgMap={"progressed":"FFDCFCE7","regressed":"FFFEE2E2","new":"FFE8F5E9","removed":"FFFCE4EC","unchanged":"FFFFFFFF","changed":"FFFEF9C3"};
       const cfgMap={"progressed":"FF14532D","regressed":"FF991B1B","new":"FF14532D","removed":"FF880E4F","unchanged":"FF6B7280","changed":"FF854D0E"};
       filtered.sort((a,b)=>{const o={"regressed":0,"new":1,"progressed":2,"changed":3,"unchanged":4,"removed":5};return(o[a.changeType]||9)-(o[b.changeType]||9);})
@@ -1681,7 +2012,7 @@ function runCompare(){
       XLSX.utils.book_append_sheet(wb,wc,"ASIN Changes");
       // Status Flow sheet
       const wf={};
-      ["From Status","To Status","ASIN Count","Direction"].forEach((h,ci)=>scell(wf,0,ci,h,hdr()));
+      ["From Status","To Status","ASIN Count","Direction"].forEach((h,ci)=>scell(wf,0,ci,h,hdr("FF1B2A4A","FFFFFFFF")));
       const flowSorted=Object.entries(flowMatrix).sort((a,b)=>b[1]-a[1]);
       flowSorted.forEach(([key,cnt],ri)=>{
         const [from,to]=key.split("→");const alt=ri%2===0?"FFFFFFFF":"FFF9FAFB";
@@ -1717,7 +2048,7 @@ function runCompare(){
       tbl+="</tbody></table>";
       document.getElementById("cmp-table").innerHTML=tbl;
       document.getElementById("cmp-rtitle").textContent="Comparison ready";
-      document.getElementById("cmp-rsub").textContent=`${allASINs.size.toLocaleString()} ASINs compared · ${flowSorted.length} unique transitions`;
+      document.getElementById("cmp-rsub").textContent=`${allASINs.size.toLocaleString()} ASINs compared · ${flowSorted.length} transitions · 4 tabs (Summary + Delta + Changes + Flow)`;
       document.getElementById("cmp-result").classList.add("show");
       btn.innerHTML="Generate Comparison Report";btn.disabled=false;
     }catch(e){
@@ -1734,18 +2065,6 @@ function dlCmp(){if(STE.cmpWB)XLSX.writeFile(STE.cmpWB,"Hive_Comparison_Report.x
 function dl(){if(STE.builtWB)XLSX.writeFile(STE.builtWB,STE.builtName);}
 function fmtRank(v){try{return Math.round(parseFloat(v)).toLocaleString();}catch(e){return String(v);}}
 function tick(){return new Promise(r=>setTimeout(r,0));}
-function parseCreatedMonth(v){
-  if(v===undefined||v===null)return null;
-  const s=String(v).trim();
-  if(!s)return null;
-  if(s.includes("/")){
-    const idx=s.lastIndexOf("/");
-    if(idx>0)return s.slice(0,idx);
-  }
-  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if(m)return `${m[1]}-${m[2]}`;
-  return null;
-}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function showErr(m){const e=document.getElementById("err-box");e.textContent=m;e.classList.add("show");}
 
